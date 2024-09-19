@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
+                <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
                 <View style={styles.logoTextContainer}>
                     <Text style={styles.title}>GlaucomApp</Text>
                     <Text style={styles.subtitle}>Hola de nuevo</Text>

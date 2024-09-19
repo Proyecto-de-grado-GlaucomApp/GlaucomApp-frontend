@@ -5,10 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/login/FormikInputField.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/login/TextLink.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/HomeScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/LoadingScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/screens/ResultScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/FormikInputField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FormikInputField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login/TextLink.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TextLink.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shared/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/shared/PrimaryButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
@@ -22,6 +30,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -50,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Felipe Castiblanco/Documents/Webstorm/Proyectos/front-end",
+    "last_opened_file_path": "C:/Users/Felipe Castiblanco/Documents/Webstorm/Proyectos/front-end/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,7 +70,14 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\components\shared" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\components" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\components\shared" />
       <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src" />
     </key>
   </component>
@@ -73,7 +89,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726712215229</updated>
-      <workItem from="1726712216266" duration="1885000" />
+      <workItem from="1726712216266" duration="4639000" />
     </task>
     <servers />
   </component>

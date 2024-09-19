@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import PrimaryButton from '../components/shared/PrimaryButton';
-import FormikInputField from '../components/login/FormikInputField';
-import Header from "../components/shared/Header";
-import TextLink from "../components/login/TextLink";
+import PrimaryButton from '../components/PrimaryButton';
+import FormikInputField from '../components/FormikInputField';
+import Header from "../components/Header";
+import TextLink from "../components/TextLink";
 import {Formik} from 'formik';
 import {loginSchema} from '../validationSchemas/login';
 
