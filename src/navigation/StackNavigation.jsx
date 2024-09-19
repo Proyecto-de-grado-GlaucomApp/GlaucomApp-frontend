@@ -15,12 +15,5 @@ const StackNavigator = () => {
 export default StackNavigator
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#769BCE',
-        padding: 20,
-        justifyContent: 'center',
-    },
-});
+
 
