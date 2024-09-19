@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/validationSchemas/Register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/HeaderMain.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" afterDir="false" />
     </list>
@@ -19,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -79,7 +80,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726712215229</updated>
-      <workItem from="1726712216266" duration="5471000" />
+      <workItem from="1726712216266" duration="7529000" />
     </task>
     <servers />
   </component>

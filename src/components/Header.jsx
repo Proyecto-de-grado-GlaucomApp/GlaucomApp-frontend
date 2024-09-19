@@ -1,45 +1,28 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const Header = () => {
-    return (
-        <View style={styles.container}>
-            <View style={styles.logoContainer}>
-                <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
-                <View style={styles.logoTextContainer}>
-                    <Text style={styles.title}>GlaucomApp</Text>
-                    <Text style={styles.subtitle}>Hola de nuevo</Text>
-                </View>
-            </View>
-        </View>
-    );
-};
+const Header = () => (
+    <View style={styles.header}>
+        <Text style={styles.welcomeText}>HOLA DE NUEVO</Text>
+        <Text style={styles.nameText}>LEONARDO</Text>
+    </View>
+);
 
 const styles = StyleSheet.create({
-    container: {
-        alignItems: 'center',
-        marginBottom: 50,
+    header: {
+        alignItems: 'flex-start',
+        backgroundColor: '#769BCE',
+        paddingVertical: 50,
+        paddingHorizontal: 20,
     },
-    logoContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    logoTextContainer: {
-        marginLeft: 10,
-    },
-    logo: {
-        width: 70,
-        height: 60,
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#FFFFFF',
-        marginTop: 10,
-    },
-    subtitle: {
+    welcomeText: {
         fontSize: 16,
-        color: '#FFFFFF',
+        color: '#ffffff',
+    },
+    nameText: {
+        fontSize: 35,
+        color: '#FFDD00',
+        fontWeight: 'semibold',
     },
 });
 

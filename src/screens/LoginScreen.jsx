@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import PrimaryButton from '../components/PrimaryButton';
 import FormikInputField from '../components/FormikInputField';
-import Header from "../components/Header";
+import HeaderMain from "../components/HeaderMain";
 import TextLink from "../components/TextLink";
 import {Formik} from 'formik';
 import {loginSchema} from '../validationSchemas/login';
@@ -22,7 +22,7 @@ export default function LoginScreen({navigation}) {
             {({handleSubmit}) => {
                 return (
                     <View style={styles.container}>
-                        <Header />
+                        <HeaderMain />
 
                         <FormikInputField
                             name='email'

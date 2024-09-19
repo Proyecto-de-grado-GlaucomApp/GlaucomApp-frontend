@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Image, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
+import Header from '../components/Header';
+import SelectionButton from '../components/SelectionButton';
 
 const HomeScreen = () => {
     const [selectedImage, setSelectedImage] = useState(null);
@@ -27,8 +29,6 @@ const HomeScreen = () => {
             Alert.alert('Error', 'No se pudo seleccionar la imagen.');
         }
     };
-
-
 
     // Función para tomar una foto con la cámara
     const takePhoto = async () => {
@@ -72,23 +72,23 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.welcomeText}>HOLA DE NUEVO</Text>
-                <Text style={styles.nameText}>LEONARDO</Text>
-            </View>
+            <Header />
             <View style={styles.containerSecond}>
-                <TouchableOpacity style={styles.uploadContainer} onPress={pickImage}>
-                    <Image source={require('../../assets/icons/frame.png')} style={styles.uploadIcon} />
-                    <Text style={styles.descriptionText}>Subir desde galería</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.uploadContainer} onPress={pickDocument}>
-                    <Image source={require('../../assets/icons/frame.png')} style={styles.uploadIcon} />
-                    <Text style={styles.descriptionText}>Seleccionar desde una aplicación</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.uploadContainer} onPress={takePhoto}>
-                    <Image source={require('../../assets/icons/frame.png')} style={styles.uploadIcon} />
-                    <Text style={styles.descriptionText}>Tomar una Foto</Text>
-                </TouchableOpacity>
+                <SelectionButton
+                    onPress={pickImage}
+                    imageSource={require('../../assets/icons/frame.png')}
+                    text="Subir desde galería"
+                />
+                <SelectionButton
+                    onPress={pickDocument}
+                    imageSource={require('../../assets/icons/frame.png')}
+                    text="Seleccionar desde una aplicación"
+                />
+                <SelectionButton
+                    onPress={takePhoto}
+                    imageSource={require('../../assets/icons/frame.png')}
+                    text="Tomar una Foto"
+                />
                 {selectedImage && (
                     <Image
                         source={{ uri: selectedImage }}
@@ -111,40 +111,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 20,
-    },
-    header: {
-        alignItems: 'flex-start',
-        backgroundColor: '#769BCE',
-        paddingVertical: 50,
-        paddingHorizontal: 20,
-    },
-    welcomeText: {
-        fontSize: 16,
-        color: '#ffffff',
-    },
-    nameText: {
-        fontSize: 35,
-        color: '#FFDD00',
-        fontWeight: 'semibold',
-    },
-    uploadContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        backgroundColor: '#769BCE',
-        borderRadius: 20,
-        width: '100%',
-        marginTop: 30,
-        paddingHorizontal: 20,
-    },
-    uploadIcon: {
-        width: 50,
-        height: 50,
-        marginVertical: 10,
-    },
-    descriptionText: {
-        color: '#FFFFFF',
-        fontSize: 15,
     },
     previewImage: {
         width: '100%',
