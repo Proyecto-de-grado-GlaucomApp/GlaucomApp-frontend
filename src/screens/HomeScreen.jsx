@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import { View, Image, Alert, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
 import * as FileSystem from 'expo-file-system';
 import Header from '../components/Header';
 import SelectionButton from '../components/SelectionButton';
 
-const HomeScreen = () => {
-    const [selectedImage, setSelectedImage] = useState(null);
-
+const HomeScreen = ({ navigation }) => {
     // Función para seleccionar imagen desde la galería
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -24,7 +22,7 @@ const HomeScreen = () => {
         });
 
         if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
+            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo seleccionar la imagen.');
         }
@@ -45,7 +43,7 @@ const HomeScreen = () => {
         });
 
         if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
+            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo tomar la foto.');
         }
@@ -60,11 +58,8 @@ const HomeScreen = () => {
 
         console.log(result); // Verifica el resultado
 
-        if (result) {//=== 'success' && result.assets && result.assets.length > 0) {
-            setSelectedImage(result.assets[0].uri);
-            // Verifica la accesibilidad del archivo
-            const fileInfo = await FileSystem.getInfoAsync(result.assets[0].uri);
-            console.log('File Info: ', fileInfo);
+        if (result) { //=== 'success' && result.assets && result.assets.length > 0) {
+            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo seleccionar el archivo o el archivo seleccionado no es válido.');
         }
@@ -89,13 +84,6 @@ const HomeScreen = () => {
                     imageSource={require('../../assets/icons/frame.png')}
                     text="Tomar una Foto"
                 />
-                {selectedImage && (
-                    <Image
-                        source={{ uri: selectedImage }}
-                        style={styles.previewImage}
-                        onError={(error) => console.log('Error al cargar imagen:', error.nativeEvent.error)}
-                    />
-                )}
             </View>
         </View>
     );
@@ -111,12 +99,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 20,
-    },
-    previewImage: {
-        width: '100%',
-        height: 200,
-        marginTop: 20,
-        borderRadius: 10,
     },
 });
 

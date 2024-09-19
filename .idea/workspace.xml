@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/HeaderMain.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/HomeScreen.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +78,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1726712215229</updated>
-      <workItem from="1726712216266" duration="7529000" />
+      <workItem from="1726712216266" duration="9599000" />
     </task>
     <servers />
   </component>
