@@ -37,7 +37,7 @@ export default function LoginScreen({navigation}) {
                         />
 
                         <PrimaryButton title="Iniciar Sesión" onPress={() => navigation.navigate('Home')} />
-                        <TextLink title="Registrarse" onPress={() => navigation.navigate('Login')} />
+                        <TextLink title="Registrarse" onPress={() => navigation.navigate('Register')} />
 
                     </View>
                 );
