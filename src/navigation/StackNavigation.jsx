@@ -1,0 +1,26 @@
+import * as React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from '../screens/LoginScreen';
+
+const Stack = createStackNavigator();
+
+const StackNavigator = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+        </Stack.Navigator>
+    );
+};
+
+export default StackNavigator
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#769BCE',
+        padding: 20,
+        justifyContent: 'center',
+    },
+});
+
