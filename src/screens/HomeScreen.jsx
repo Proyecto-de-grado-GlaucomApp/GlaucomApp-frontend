@@ -1,87 +1,26 @@
 import React from 'react';
-import { View, Alert, StyleSheet } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
-import * as DocumentPicker from 'expo-document-picker';
+import { View, StyleSheet } from 'react-native';
 import Header from '../components/Header';
 import SelectionButton from '../components/SelectionButton';
+import { pickImage, pickDocument, takePhoto } from '../utils/imageUtils';
 
 const HomeScreen = ({ navigation }) => {
-    // Función para seleccionar imagen desde la galería
-    const pickImage = async () => {
-        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (permissionResult.granted === false) {
-            Alert.alert("Permiso requerido", "Necesitas habilitar permisos para acceder a la galería.");
-            return;
-        }
-
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: false,
-            quality: 1,
-        });
-
-        if (!result.canceled && result.assets.length > 0) {
-            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
-        } else {
-            Alert.alert('Error', 'No se pudo seleccionar la imagen.');
-        }
-    };
-
-    // Función para tomar una foto con la cámara
-    const takePhoto = async () => {
-        const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-        if (permissionResult.granted === false) {
-            Alert.alert("Permiso requerido", "Necesitas habilitar permisos para usar la cámara.");
-            return;
-        }
-
-        let result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: false,
-            quality: 1,
-        });
-
-        if (!result.canceled && result.assets.length > 0) {
-            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
-        } else {
-            Alert.alert('Error', 'No se pudo tomar la foto.');
-        }
-    };
-
-    // Función para seleccionar archivo desde servicios en la nube como Google Drive y Dropbox
-    const pickDocument = async () => {
-        let result = await DocumentPicker.getDocumentAsync({
-            type: "image/*", // Solo imágenes
-            copyToCacheDirectory: true,
-        });
-
-        // Imprime el resultado para depuración
-        console.log(result);
-
-        // Verifica si el archivo tiene una URI válida
-        if (result) {
-            navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
-        } else {
-            Alert.alert('Error', 'No se pudo seleccionar el archivo o el archivo seleccionado no es válido.');
-        }
-    };
-
     return (
         <View style={styles.container}>
             <Header />
             <View style={styles.containerSecond}>
                 <SelectionButton
-                    onPress={pickImage}
+                    onPress={() => pickImage(navigation)}
                     imageSource={require('../../assets/icons/frame.png')}
                     text="Subir desde galería"
                 />
                 <SelectionButton
-                    onPress={pickDocument}
+                    onPress={() => pickDocument(navigation)}
                     imageSource={require('../../assets/icons/frame.png')}
                     text="Seleccionar desde una aplicación"
                 />
                 <SelectionButton
-                    onPress={takePhoto}
+                    onPress={() => takePhoto(navigation)}
                     imageSource={require('../../assets/icons/frame.png')}
                     text="Tomar una Foto"
                 />

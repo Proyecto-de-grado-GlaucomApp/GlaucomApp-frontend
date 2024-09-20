@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { postApiLocal } from "../services/upload";
-import { MaterialIcons } from '@expo/vector-icons';
+import React, {useEffect, useState, useRef} from 'react';
+import {View, Text, StyleSheet, ActivityIndicator, Alert} from 'react-native';
+import {useRoute} from '@react-navigation/native';
+import {postApiLocal} from "../services/upload";
+import {MaterialIcons} from '@expo/vector-icons';
 
-const LoadingScreen = ({ navigation }) => {
+const LoadingScreen = ({navigation}) => {
     const route = useRoute();
-    const { uri } = route.params || {};
+    const {uri} = route.params || {};
     const [loading, setLoading] = useState(true);
     const successRef = useRef(null); // Usar useRef para mantener el valor de success
 
@@ -39,11 +39,11 @@ const LoadingScreen = ({ navigation }) => {
                 const success = successRef.current; // Lee el valor actualizado de success
                 console.log('success:', success);
                 if (success === true) {
-                    Alert.alert('Éxito', 'La imagen se procesó correctamente.', [{ text: 'OK', onPress: () => navigation.navigate('Result') }]);
+                    navigation.navigate('Result')
                 } else {
-                    Alert.alert('Error', 'No se pudo procesar la imagen.', [{ text: 'OK', onPress: () => navigation.navigate('Home') }]);
+                    navigation.navigate('Home')
                 }
-            }, 3000);
+            }, 2000);
         }
     };
 
@@ -51,15 +51,15 @@ const LoadingScreen = ({ navigation }) => {
         <View style={styles.container}>
             {loading ? (
                 <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color="#0000ff" />
+                    <ActivityIndicator size="large" color="#0000ff"/>
                     <Text>Procesando imagen...</Text>
                 </View>
             ) : (
                 <View style={styles.resultContainer}>
                     {successRef.current === true ? (
-                        <MaterialIcons name="check-circle" size={50} color="green" />
+                        <MaterialIcons name="check-circle" size={50} color="green"/>
                     ) : (
-                        <MaterialIcons name="cancel" size={50} color="red" />
+                        <MaterialIcons name="cancel" size={50} color="red"/>
                     )}
                     <Text>{successRef.current === true ? 'Imagen procesada correctamente.' : 'Error al procesar la imagen.'}</Text>
                 </View>
