@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
 import Header from '../components/Header';
 import SelectionButton from '../components/SelectionButton';
 
@@ -21,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
             quality: 1,
         });
 
-        if (!result.canceled) {
+        if (!result.canceled && result.assets.length > 0) {
             navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo seleccionar la imagen.');
@@ -42,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
             quality: 1,
         });
 
-        if (!result.canceled) {
+        if (!result.canceled && result.assets.length > 0) {
             navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo tomar la foto.');
@@ -56,9 +55,11 @@ const HomeScreen = ({ navigation }) => {
             copyToCacheDirectory: true,
         });
 
-        console.log(result); // Verifica el resultado
+        // Imprime el resultado para depuración
+        console.log(result);
 
-        if (result) { //=== 'success' && result.assets && result.assets.length > 0) {
+        // Verifica si el archivo tiene una URI válida
+        if (result) {
             navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
         } else {
             Alert.alert('Error', 'No se pudo seleccionar el archivo o el archivo seleccionado no es válido.');
