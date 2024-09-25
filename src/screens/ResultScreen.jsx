@@ -4,7 +4,7 @@ import { useRoute } from '@react-navigation/native';
 
 const ResultScreen = () => {
     const route = useRoute();
-    const { responseData } = route.params || {}; // Obtener los datos de la respuesta
+    const { responseData } = route.params || {};
 
     return (
         <View style={styles.container}>
@@ -12,14 +12,25 @@ const ResultScreen = () => {
 
             {responseData ? (
                 <View style={styles.dataContainer}>
-                    <Text style={styles.title}>Resultados del procesamiento:</Text>
-                    <Text style={styles.dataText}>Algoritmo Uno - X: {responseData.variables_uno.x}</Text>
-                    <Text style={styles.dataText}>Algoritmo Uno - Y: {responseData.variables_uno.y}</Text>
-                    <Text style={styles.dataText}>Algoritmo Uno - Radio: {responseData.variables_uno.radius}</Text>
+                    <Text style={styles.title}>Descripción:</Text>
+                    <Text style={styles.dataText}>{responseData.descripcion}</Text>
 
-                    <Text style={styles.dataText}>Algoritmo Dos - X: {responseData.variables_dos.x}</Text>
-                    <Text style={styles.dataText}>Algoritmo Dos - Y: {responseData.variables_dos.y}</Text>
-                    <Text style={styles.dataText}>Algoritmo Dos - Radio: {responseData.variables_dos.radius}</Text>
+                    <Text style={styles.title}>Porcentaje del semáforo:</Text>
+                    <Text style={styles.dataText}>{responseData.porcentaje_semaforo}%</Text>
+
+                    <Text style={styles.title}>Áreas:</Text>
+                    {responseData.areas.map((area, index) => (
+                        <Text key={index} style={styles.dataText}>
+                            {area.nombre}: {area.valor}
+                        </Text>
+                    ))}
+
+                    <Text style={styles.title}>Perímetros:</Text>
+                    {responseData.perimetro.map((perimetro, index) => (
+                        <Text key={index} style={styles.dataText}>
+                            {perimetro.nombre}: {perimetro.valor}
+                        </Text>
+                    ))}
 
                     <Text style={styles.dataText}>Tiempo de procesamiento: {responseData.processing_time.toFixed(2)} segundos</Text>
                 </View>

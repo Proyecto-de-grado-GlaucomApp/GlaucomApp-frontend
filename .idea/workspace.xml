@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/imageService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SelectionButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SelectionButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ResultScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/ResultScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JSX File" />
         <option value="JavaScript File" />
+        <option value="JSX File" />
       </list>
     </option>
   </component>
@@ -84,7 +90,7 @@
       <workItem from="1726762441148" duration="21731000" />
       <workItem from="1726796722534" duration="7365000" />
       <workItem from="1726945527795" duration="1018000" />
-      <workItem from="1727302265575" duration="1775000" />
+      <workItem from="1727302265575" duration="4757000" />
     </task>
     <servers />
   </component>

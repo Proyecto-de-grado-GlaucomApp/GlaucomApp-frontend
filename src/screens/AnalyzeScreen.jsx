@@ -1,44 +1,40 @@
-import React, {useEffect, useState} from 'react';
-import {View, Image, StyleSheet, Alert} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Image, StyleSheet, Alert } from 'react-native';
 import PrimaryButton from "../components/PrimaryButton";
-import * as FileSystem from 'expo-file-system';
+import { downloadImage } from '../utils/imageService';
 
-const AnalyzeScreen = ({route, navigation}) => {
-    const {imageUri} = route.params;
+const AnalyzeScreen = ({ route, navigation }) => {
+    const { imageUri } = route.params;
     const [localImageUri, setLocalImageUri] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const downloadImage = async () => {
-            try {
-                if (imageUri && (imageUri.startsWith('http://') || imageUri.startsWith('https://'))) {
-                    // Ruta donde se almacenará la imagen descargada
-                    const fileUri = FileSystem.documentDirectory + 'downloadedImage.jpg';
-                    const {uri} = await FileSystem.downloadAsync(imageUri, fileUri);
-                    setLocalImageUri(uri); // Guarda la URI del archivo descargado
-                } else {
-                    setLocalImageUri(imageUri); // Usa la URI proporcionada si no es una URL
-                }
-            } catch (error) {
-                console.error('Error downloading image:', error);
-                Alert.alert('Error', 'No se pudo descargar la imagen.');
-            } finally {
-                setLoading(false); // Marca la carga como completada
-            }
-        };
-
-        downloadImage();
+        downloadImage(imageUri, setLocalImageUri, setLoading);
     }, [imageUri]);
+
+
+    /*
+    useEffect(() => {
+        setLoading(true); // Asegúrate de que loading esté en true al comenzar
+        downloadImage(imageUri, setLocalImageUri, setLoading)
+            .then(() => {
+                setLoading(false); // Se completó la descarga
+            })
+            .catch((error) => {
+                setLoading(false); // Se completó la descarga con error
+                Alert.alert('Error', 'Hubo un problema al descargar la imagen.');
+            });
+    }, [imageUri]);
+    */
 
     const handlePress = () => {
         if (localImageUri) {
-            navigation.navigate('Loading', {uri: localImageUri});
+            navigation.navigate('Loading', { uri: localImageUri });
         } else {
             Alert.alert('No image URI provided');
         }
     };
 
-    // Mostrar un mensaje de carga si la imagen aún no está disponible
     if (loading) {
         Alert.alert('Cargando imagen...', 'La imagen está siendo cargada. Por favor, espera.');
     }
@@ -48,15 +44,16 @@ const AnalyzeScreen = ({route, navigation}) => {
             <View style={styles.imageContainer}>
                 {localImageUri ? (
                     <Image
-                        source={{uri: localImageUri}}
+                        source={{ uri: localImageUri }}
                         style={styles.image}
-                    />) : (
-                    <View style={styles.image}/> // En lugar de marcador de posición, solo deja el contenedor vacío
+                    />
+                ) : (
+                    <View style={styles.image} />
                 )}
             </View>
 
             <View style={styles.buttonContainer}>
-                <PrimaryButton title="Realizar análisis" onPress={handlePress}/>
+                <PrimaryButton title="Realizar análisis" onPress={handlePress} />
             </View>
         </View>
     );
