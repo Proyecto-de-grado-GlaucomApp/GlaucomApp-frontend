@@ -9,6 +9,7 @@ const LoadingScreen = ({navigation}) => {
     const {uri} = route.params || {};
     const [loading, setLoading] = useState(true);
     const successRef = useRef(null); // Usar useRef para mantener el valor de success
+    const responseDataRef = useRef(null); // Mantener los datos de la respuesta
 
     useEffect(() => {
         if (uri) {
@@ -23,8 +24,9 @@ const LoadingScreen = ({navigation}) => {
             const respuesta = await postApiLocal(imageUri);
             console.log('Respuesta del servidor:', respuesta);
             // Verifica si hay una imagen en la respuesta
-            if (respuesta && respuesta.data) {
+            if (respuesta) {
                 successRef.current = true; // Actualiza el valor de referencia
+                responseDataRef.current = respuesta; // Guarda la respuesta
                 console.log('Entro aqui True');
             } else {
                 successRef.current = false; // Actualiza el valor de referencia
@@ -39,9 +41,10 @@ const LoadingScreen = ({navigation}) => {
                 const success = successRef.current; // Lee el valor actualizado de success
                 console.log('success:', success);
                 if (success === true) {
-                    navigation.navigate('Result')
+                    // Navegar a ResultScreen y pasar la respuesta
+                    navigation.navigate('Result', { responseData: responseDataRef.current });
                 } else {
-                    navigation.navigate('Home')
+                    navigation.navigate('Home');
                 }
             }, 2000);
         }

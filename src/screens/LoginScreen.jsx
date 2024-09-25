@@ -8,7 +8,6 @@ import {Formik} from 'formik';
 import {loginSchema} from '../validationSchemas/login';
 
 
-
 const initialValues   = {
     email: '',
     password: '',
@@ -27,7 +26,7 @@ export default function LoginScreen({navigation}) {
                         <FormikInputField
                             name='email'
                             placeholder='Email'
-                            iconName="person"
+                            iconName="mail"
                         />
                         <FormikInputField
                             name='password'

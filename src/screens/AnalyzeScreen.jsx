@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, StyleSheet, Alert } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Image, StyleSheet, Alert} from 'react-native';
 import PrimaryButton from "../components/PrimaryButton";
 import * as FileSystem from 'expo-file-system';
 
-const AnalyzeScreen = ({ route, navigation }) => {
-    const { imageUri } = route.params;
+const AnalyzeScreen = ({route, navigation}) => {
+    const {imageUri} = route.params;
     const [localImageUri, setLocalImageUri] = useState(null);
-    const [loading, setLoading] = useState(true); // Estado para gestionar la carga de la imagen
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const downloadImage = async () => {
@@ -14,7 +14,7 @@ const AnalyzeScreen = ({ route, navigation }) => {
                 if (imageUri && (imageUri.startsWith('http://') || imageUri.startsWith('https://'))) {
                     // Ruta donde se almacenará la imagen descargada
                     const fileUri = FileSystem.documentDirectory + 'downloadedImage.jpg';
-                    const { uri } = await FileSystem.downloadAsync(imageUri, fileUri);
+                    const {uri} = await FileSystem.downloadAsync(imageUri, fileUri);
                     setLocalImageUri(uri); // Guarda la URI del archivo descargado
                 } else {
                     setLocalImageUri(imageUri); // Usa la URI proporcionada si no es una URL
@@ -32,7 +32,7 @@ const AnalyzeScreen = ({ route, navigation }) => {
 
     const handlePress = () => {
         if (localImageUri) {
-            navigation.navigate('Loading', { uri: localImageUri });
+            navigation.navigate('Loading', {uri: localImageUri});
         } else {
             Alert.alert('No image URI provided');
         }
@@ -48,15 +48,15 @@ const AnalyzeScreen = ({ route, navigation }) => {
             <View style={styles.imageContainer}>
                 {localImageUri ? (
                     <Image
-                        source={{ uri: localImageUri }}
+                        source={{uri: localImageUri}}
                         style={styles.image}
-                    />):(
-                    <View style={styles.image} /> // En lugar de marcador de posición, solo deja el contenedor vacío
+                    />) : (
+                    <View style={styles.image}/> // En lugar de marcador de posición, solo deja el contenedor vacío
                 )}
             </View>
 
             <View style={styles.buttonContainer}>
-                <PrimaryButton title="Realizar análisis" onPress={handlePress} />
+                <PrimaryButton title="Realizar análisis" onPress={handlePress}/>
             </View>
         </View>
     );

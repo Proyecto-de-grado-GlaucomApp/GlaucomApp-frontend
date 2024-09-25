@@ -34,7 +34,7 @@ export default function RegisterScreen({navigation}) {
                         <FormikInputField
                             name='email'
                             placeholder='Email'
-                            iconName="person"
+                            iconName="mail"
                         />
                         <FormikInputField
                             name='password'

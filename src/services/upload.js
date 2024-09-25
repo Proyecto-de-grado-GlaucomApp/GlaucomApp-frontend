@@ -37,28 +37,8 @@ export async function postApiLocal(imageUri) {
             throw new Error(`Error en la respuesta: ${response.status}`);
         }
 
-        const contentType = response.headers.get('content-type');
-        let data;
-        if (contentType && contentType.includes('application/json')) {
-            data = await response.json();
-        } else if (contentType && contentType.includes('image')) {
-            data = await response.blob(); // No lo estamos usando, pero puedes manejarlo si es necesario
-        }
-
-        const headers = {
-            contentDisposition: response.headers.get('content-disposition'),
-            contentType: response.headers.get('content-type'),
-            variables: {
-                '1-radius': response.headers.get('1-variables-radius'),
-                '1-x': response.headers.get('1-variables-x'),
-                '1-y': response.headers.get('1-variables-y'),
-                '2-radius': response.headers.get('2-variables-radius'),
-                '2-x': response.headers.get('2-variables-x'),
-                '2-y': response.headers.get('2-variables-y'),
-            },
-        };
-
-        return { data, headers };
+        // Procesamos la respuesta como JSON
+        return await response.json();
 
     } catch (error) {
         console.error('Error en postApiLocal:', error);
