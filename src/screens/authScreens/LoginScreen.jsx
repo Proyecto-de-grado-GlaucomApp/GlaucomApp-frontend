@@ -1,11 +1,11 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import PrimaryButton from '../components/PrimaryButton';
-import FormikInputField from '../components/FormikInputField';
-import HeaderMain from "../components/HeaderMain";
-import TextLink from "../components/TextLink";
+import PrimaryButton from '../../components/PrimaryButton';
+import FormikInputField from '../../components/FormikInputField';
+import HeaderMain from "../../components/HeaderMain";
+import TextLink from "../../components/TextLink";
 import {Formik} from 'formik';
-import {loginSchema} from '../validationSchemas/login';
+import {loginSchema} from '../../validationSchemas/login';
 
 
 const initialValues   = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Header from '../components/Header';
-import SelectionButton from '../components/SelectionButton';
-import { pickImage, pickDocument, takePhoto } from '../utils/imageUtils';
+import Header from '../../components/Header';
+import SelectionButton from '../../components/SelectionButton';
+import { pickImage, pickDocument, takePhoto } from '../../utils/imageUtils';
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -11,17 +11,17 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.containerSecond}>
                 <SelectionButton
                     onPress={() => pickImage(navigation)}
-                    imageSource={require('../../assets/icons/frame.png')}
+                    imageSource={require('../../../assets/icons/frame.png')}
                     text="Subir desde galería"
                 />
                 <SelectionButton
                     onPress={() => pickDocument(navigation)}
-                    imageSource={require('../../assets/icons/frame.png')}
+                    imageSource={require('../../../assets/icons/frame.png')}
                     text="Seleccionar desde una aplicación"
                 />
                 <SelectionButton
                     onPress={() => takePhoto(navigation)}
-                    imageSource={require('../../assets/icons/frame.png')}
+                    imageSource={require('../../../assets/icons/frame.png')}
                     text="Tomar una Foto"
                 />
             </View>

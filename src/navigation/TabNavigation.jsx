@@ -29,7 +29,7 @@ function TabNavigator() {
                 },
                 tabBarActiveTintColor: '#769BCE',
                 tabBarInactiveTintColor: '#769BCE',
-                tabBarStyle: styles.tabBarStyle,       // Usando el estilo desacoplado
+                tabBarStyle: styles.tabBarStyle,
             })}
         >
             <Tab.Screen

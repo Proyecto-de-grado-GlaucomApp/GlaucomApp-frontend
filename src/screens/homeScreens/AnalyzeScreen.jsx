@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet, Alert } from 'react-native';
-import PrimaryButton from "../components/PrimaryButton";
-import { downloadImage } from '../utils/imageService';
+import PrimaryButton from "../../components/PrimaryButton";
+import { downloadImage } from '../../utils/imageService';
 
 const AnalyzeScreen = ({ route, navigation }) => {
     const { imageUri } = route.params;

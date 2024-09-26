@@ -1,19 +1,9 @@
-
-export async function getApiLocal() {
-    try {
-        const apiUrl = 'http://192.168.1.3:8000';
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        return data
-
-    } catch (error) {
-        throw error
-    }
-}
-
 export async function postApiLocal(imageUri) {
     try {
-        const apiUrl = 'http://192.168.1.3:8000/uploadfiles/';
+        const apiUrl = process.env.EXPO + '/uploadfiles/';
+
+        console.log('apiUrl:  ', apiUrl);
+
         const formData = new FormData();
         const filename = imageUri.split('/').pop();
         const fileType = filename.split('.').pop();
@@ -37,7 +27,6 @@ export async function postApiLocal(imageUri) {
             throw new Error(`Error en la respuesta: ${response.status}`);
         }
 
-        // Procesamos la respuesta como JSON
         return await response.json();
 
     } catch (error) {

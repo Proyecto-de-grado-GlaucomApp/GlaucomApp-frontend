@@ -8,7 +8,7 @@ const ResultScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../assets/images/img.png')} style={styles.logo} />
+            <Image source={require('../../../assets/images/img.png')} style={styles.logo} />
 
             {responseData ? (
                 <View style={styles.dataContainer}>

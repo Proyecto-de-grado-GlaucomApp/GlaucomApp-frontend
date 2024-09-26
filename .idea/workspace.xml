@@ -5,18 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/SettingScreen.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/screens/patientSreen.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/getApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/AnalyzeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/AnalyzeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/HomeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/HomeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoadingScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/LoadingScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/authScreens/LoginScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/RegisterScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/authScreens/RegisterScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/ResultScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/ResultScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/SettingScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/settingScreens/SettingScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/patientSreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/patientScreens/patientSreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/upload.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +34,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -76,11 +83,11 @@
       <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\settingScreens" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\patientScreens" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\homeScreens" />
+      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\authScreens" />
       <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\services" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\services\api" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\components" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\components\shared" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,7 +103,8 @@
       <workItem from="1726796722534" duration="7365000" />
       <workItem from="1726945527795" duration="1018000" />
       <workItem from="1727302265575" duration="10277000" />
-      <workItem from="1727323531716" duration="1112000" />
+      <workItem from="1727323531716" duration="2004000" />
+      <workItem from="1727373467779" duration="1986000" />
     </task>
     <servers />
   </component>
