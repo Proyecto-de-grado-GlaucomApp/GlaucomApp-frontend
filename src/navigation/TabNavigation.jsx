@@ -30,27 +30,28 @@ function TabNavigator() {
                 tabBarActiveTintColor: '#769BCE',
                 tabBarInactiveTintColor: '#769BCE',
                 tabBarStyle: styles.tabBarStyle,
+                headerShown: false
             })}
         >
             <Tab.Screen
                 name="PatientsNavigation"
                 component={PatientsNavigation}
                 options={{
-                    tabBarLabel: 'Patients',
+                    tabBarLabel: 'Pacientes',
                 }}
             />
             <Tab.Screen
                 name="HomeNavigation"
                 component={HomeNavigation}
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Inicio',
                 }}
             />
             <Tab.Screen
                 name="SettingsNaviation"
                 component={SettingsNavigation}
                 options={{
-                    tabBarLabel: 'Settings',
+                    tabBarLabel: 'Configuracion',
                 }}
             />
         </Tab.Navigator>

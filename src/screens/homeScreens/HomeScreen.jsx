@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Header from '../../components/Header';
 import SelectionButton from '../../components/SelectionButton';
 import { pickImage, pickDocument, takePhoto } from '../../utils/imageUtils';
 
 const HomeScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Header />
             <View style={styles.containerSecond}>
                 <SelectionButton
@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
                     text="Tomar una Foto"
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
