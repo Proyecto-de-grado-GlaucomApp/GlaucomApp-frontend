@@ -9,16 +9,18 @@ import ResultScreen from "../screens/ResultScreen";
 
 const Stack = createStackNavigator();
 
-const StackNavigator = () => {
+const PatientsNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Register" component={RegisterScreen} />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Analyze" component={AnalyzeScreen} />
+            <Stack.Screen name="Loading" component={LoadingScreen} />
+            <Stack.Screen name="Result" component={ResultScreen} />
         </Stack.Navigator>
     );
 };
 
-export default StackNavigator
+export default PatientsNavigation
 
 
 

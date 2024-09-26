@@ -1,23 +1,69 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Tabs } from 'expo-router';
+import * as React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StyleSheet } from 'react-native';
+import HomeNavigation from "./HomeNavigation";
+import PatientsNavigation from "./PatientsNavigation";
+import SettingsNavigation from "./SettingsNavigation";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-export default function TabLayout() {
+const Tab = createBottomTabNavigator();
+
+function TabNavigator() {
     return (
-        <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
-            <Tabs.Screen
-                name="index"
+        <Tab.Navigator
+            initialRouteName="HomeNavigation"
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+
+                    if (route.name === 'HomeNavigation') {
+                        iconName = focused ? 'home' : 'home-outline';
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    } else if (route.name === 'PatientsNavigation') {
+                        iconName = focused ? 'people' : 'people-outline';
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    } else if (route.name === 'SettingsNaviation') {
+                        iconName = focused ? 'settings' : 'settings-outline';
+                        return <Ionicons name={iconName} size={size} color={color} />;
+                    }
+                },
+                tabBarActiveTintColor: '#769BCE',
+                tabBarInactiveTintColor: '#769BCE',
+                tabBarStyle: styles.tabBarStyle,       // Usando el estilo desacoplado
+            })}
+        >
+            <Tab.Screen
+                name="PatientsNavigation"
+                component={PatientsNavigation}
                 options={{
-                    title: 'Home',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
+                    tabBarLabel: 'Patients',
                 }}
             />
-            <Tabs.Screen
-                name="settings"
+            <Tab.Screen
+                name="HomeNavigation"
+                component={HomeNavigation}
                 options={{
-                    title: 'Settings',
-                    tabBarIcon: ({ color }) => <FontAwesome size={28} name="cog" color={color} />,
+                    tabBarLabel: 'Home',
                 }}
             />
-        </Tabs>
+            <Tab.Screen
+                name="SettingsNaviation"
+                component={SettingsNavigation}
+                options={{
+                    tabBarLabel: 'Settings',
+                }}
+            />
+        </Tab.Navigator>
     );
 }
+
+// Estilos desacoplados usando StyleSheet
+const styles = StyleSheet.create({
+    tabBarStyle: {
+        paddingBottom: 10,
+        paddingTop: 10,
+        height: 70,
+    }
+});
+
+export default TabNavigator;

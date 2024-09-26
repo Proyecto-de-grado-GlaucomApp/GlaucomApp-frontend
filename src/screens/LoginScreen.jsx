@@ -35,7 +35,7 @@ export default function LoginScreen({navigation}) {
                             secureTextEntry={true}
                         />
 
-                        <PrimaryButton title="Iniciar Sesión" onPress={() => navigation.navigate('Home')} />
+                        <PrimaryButton title="Iniciar Sesión" onPress={() => navigation.navigate('HomeNavigation')} />
                         <TextLink title="Registrarse" onPress={() => navigation.navigate('Register')} />
 
                     </View>
