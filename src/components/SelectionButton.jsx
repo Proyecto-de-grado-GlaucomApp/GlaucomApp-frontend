@@ -16,8 +16,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#769BCE',
         borderRadius: 20,
         width: '100%',
-        marginTop: 30,
+        marginTop: 20,
         paddingHorizontal: 20,
+
     },
     uploadIcon: {
         width: 50,

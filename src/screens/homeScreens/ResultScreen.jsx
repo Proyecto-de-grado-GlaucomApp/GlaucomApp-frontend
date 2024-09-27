@@ -7,7 +7,6 @@ const ResultScreen = () => {
     const route = useRoute();
     const responseData = route.params?.responseData;
 
-    // Mapea los datos de la respuesta a un formato adecuado para la vista
     const viewData = mapApiResponseToViewData(responseData);
 
     return (
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     },
     dataContainer: {
         marginTop: 20,
-        alignItems: 'center',
+        alignItems: 'flex-start',
     },
     title: {
         fontSize: 20,

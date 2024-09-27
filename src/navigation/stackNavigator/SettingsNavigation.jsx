@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import SettingScreen from "../screens/settingScreens/SettingScreen";
+import SettingScreen from "../../screens/settingScreens/SettingScreen";
 
 const Stack = createStackNavigator();
 

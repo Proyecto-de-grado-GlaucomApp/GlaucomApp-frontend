@@ -1,62 +1,60 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { getPatients, getPatientById } from '../../services/patients/getApi'; // Asegúrate de que getPatientById esté importado
+import { mapApiPatients, mapApiPatientsById } from "../../utils/dataMapper";
 
+const PatientScreen = ({ navigation }) => {
+    const [patients, setPatients] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-const patients = [
-    { id: '1', name: 'John Doe', cedula: '12345678' },
-    { id: '2', name: 'Jane Smith', cedula: '87654321' },
-    { id: '3', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '4', name: 'Emily Davis', cedula: '99887766' },
-    { id: '5', name: 'William Brown', cedula: '44332211' },
-    { id: '6', name: 'John Doe', cedula: '12345678' },
-    { id: '7', name: 'Jane Smith', cedula: '87654321' },
-    { id: '8', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '9', name: 'Emily Davis', cedula: '99887766' },
-    { id: '10', name: 'William Brown', cedula: '44332211' },
-    { id: '11', name: 'John Doe', cedula: '12345678' },
-    { id: '12', name: 'Jane Smith', cedula: '87654321' },
-    { id: '13', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '14', name: 'Emily Davis', cedula: '99887766' },
-    { id: '15', name: 'William Brown', cedula: '44332211' },
-    { id: '16', name: 'John Doe', cedula: '12345678' },
-    { id: '17', name: 'Jane Smith', cedula: '87654321' },
-    { id: '18', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '19', name: 'Emily Davis', cedula: '99887766' },
-    { id: '20', name: 'William Brown', cedula: '44332211' },
-    { id: '21', name: 'John Doe', cedula: '12345678' },
-    { id: '22', name: 'Jane Smith', cedula: '87654321' },
-    { id: '23', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '24', name: 'Emily Davis', cedula: '99887766' },
-    { id: '25', name: 'William Brown', cedula: '44332211' },
-    { id: '26', name: 'John Doe', cedula: '12345678' },
-    { id: '27', name: 'Jane Smith', cedula: '87654321' },
-    { id: '28', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '29', name: 'Emily Davis', cedula: '99887766' },
-    { id: '30', name: 'William Brown', cedula: '44332211' },
-    { id: '31', name: 'John Doe', cedula: '12345678' },
-    { id: '32', name: 'Jane Smith', cedula: '87654321' },
-    { id: '33', name: 'Michael Johnson', cedula: '11223344' },
-    { id: '34', name: 'Emily Davis', cedula: '99887766' }
-];
+    useEffect(() => {
+        const fetchPatients = async () => {
+            try {
+                const response = await getPatients();
+                const mappedPatients = mapApiPatients(response);
+                setPatients(mappedPatients.patients);
+            } catch (error) {
+                console.error('Error fetching patients:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-const SettingScreen = ({ navigation }) => {
+        fetchPatients();
+    }, []); // Solo se ejecuta una vez al montar el componente
+
+    // Función para manejar la navegación y obtención de detalles del paciente
+    const handlePress = async (patientId) => {
+        try {
+            const response = await getPatientById(patientId); // Llamar a la API para obtener detalles del paciente por ID
+            const mappedPatient = mapApiPatientsById(response); // Mapeamos los datos del paciente
+            navigation.navigate('PatientDetail', { patient: mappedPatient }); // Navegar a la pantalla de detalles
+        } catch (error) {
+            console.error('Error fetching patient details:', error);
+        }
+    };
+
+    // Renderizar cada paciente
     const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('PatientDetail', { patient: item })}>
+        <TouchableOpacity style={styles.item} onPress={() => handlePress(item.id)}>
             <Text style={styles.text}>{item.name}</Text>
         </TouchableOpacity>
     );
 
     return (
         <View style={styles.container}>
-            <FlatList
-                data={patients}
-                keyExtractor={item => item.id}
-                renderItem={renderItem}
-            />
+            {loading ? (  // Mostrar el indicador de carga mientras esperamos la respuesta
+                <ActivityIndicator size="large" color="#0000ff" />
+            ) : (
+                <FlatList
+                    data={patients}
+                    keyExtractor={item => item.id.toString()}  // Asegúrate de que el id sea string
+                    renderItem={renderItem}
+                />
+            )}
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -76,6 +74,4 @@ const styles = StyleSheet.create({
     },
 });
 
-
-export default SettingScreen;
-
+export default PatientScreen;

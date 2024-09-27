@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {postApiLocal} from "../../services/images/upload";
+import {postApiLocal} from "../../services/images/uploadFileApi";
 import {MaterialIcons} from '@expo/vector-icons';
 
 const LoadingScreen = ({navigation}) => {

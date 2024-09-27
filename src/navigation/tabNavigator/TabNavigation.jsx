@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet } from 'react-native';
-import HomeNavigation from "./HomeNavigation";
-import PatientsNavigation from "./PatientsNavigation";
-import SettingsNavigation from "./SettingsNavigation";
+import HomeNavigation from "../stackNavigator/HomeNavigation";
+import PatientsNavigation from "../stackNavigator/PatientsNavigation";
+import SettingsNavigation from "../stackNavigator/SettingsNavigation";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();

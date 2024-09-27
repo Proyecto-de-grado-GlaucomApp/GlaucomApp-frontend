@@ -54,6 +54,7 @@ const AnalyzeScreen = ({ route, navigation }) => {
 
             <View style={styles.buttonContainer}>
                 <PrimaryButton title="Realizar análisis" onPress={handlePress} />
+                <PrimaryButton title="Seleccionar otra imagen" onPress={() => navigation.goBack()} />
             </View>
         </View>
     );
@@ -64,11 +65,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        marginTop: 50,
     },
     imageContainer: {
         width: '100%',
-        height: '70%',
+        height: '60%',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
@@ -77,12 +77,10 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'contain',
-        borderRadius: 20,
-        backgroundColor: '#f0f0f0',
     },
     buttonContainer: {
         width: '100%',
-        height: '30%',
+        height: '40%',
         justifyContent: 'center',
     },
 });

@@ -16,13 +16,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 30,
         alignItems: 'center',
-        marginHorizontal:70,
-        marginVertical: 30,
+        marginHorizontal:50,
+        marginVertical: 10,
     },
     text: {
         color: '#4E4E4E',
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 15,
+        fontWeight: 'normal',
     },
 });
 

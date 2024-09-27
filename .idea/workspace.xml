@@ -5,17 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/screens/patientScreens/PatientDetailScreen.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/dataMapper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PrimaryButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SelectionButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SelectionButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/HomeNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/HomeNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/PatientsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/PatientsNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/SettingsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/SettingsNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/StackNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/TabNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/tabNavigator/TabNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/AnalyzeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/AnalyzeScreen.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/HomeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/HomeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/LoadingScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/LoadingScreen.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/ResultScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/ResultScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/patientScreens/PatientDetailScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/patientScreens/PatientDetailScreen.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/patientScreens/patientSreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/patientScreens/patientSreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/images/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/images/uploadFileApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/patients/getApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/patients/getApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dataMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dataMapper.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,11 +81,11 @@
       <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Felipe Castiblanco\Desktop\GlaucomApp-frontend\src\navigation\tabNavigator" />
+      <recent name="C:\Users\Felipe Castiblanco\Desktop\GlaucomApp-frontend\src\navigation\stackNavigator" />
+      <recent name="C:\Users\Felipe Castiblanco\Desktop\GlaucomApp-frontend\src\services\patients" />
+      <recent name="C:\Users\Felipe Castiblanco\Desktop\GlaucomApp-frontend\src\services\images" />
       <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\settingScreens" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\patientScreens" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\homeScreens" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\screens\authScreens" />
-      <recent name="C:\Users\Felipe Castiblanco\Documents\Webstorm\Proyectos\front-end\src\services" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,7 +103,7 @@
       <workItem from="1727302265575" duration="10277000" />
       <workItem from="1727323531716" duration="2004000" />
       <workItem from="1727373467779" duration="1986000" />
-      <workItem from="1727376634596" duration="7870000" />
+      <workItem from="1727376634596" duration="20195000" />
     </task>
     <servers />
   </component>

@@ -17,7 +17,7 @@ const HomeScreen = ({ navigation }) => {
                 <SelectionButton
                     onPress={() => pickDocument(navigation)}
                     imageSource={require('../../../assets/icons/frame.png')}
-                    text="Seleccionar desde una aplicación"
+                    text="Subir desde una aplicación"
                 />
                 <SelectionButton
                     onPress={() => takePhoto(navigation)}
@@ -32,7 +32,6 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F0ECE3',
     },
     containerSecond: {
         flex: 1,
