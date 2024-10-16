@@ -15,7 +15,3 @@ const PatientsNavigation = () => {
 };
 
 export default PatientsNavigation
-
-
-
-

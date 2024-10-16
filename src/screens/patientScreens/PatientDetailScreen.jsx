@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8, // Espacio horizontal entre las columnas
     },
     image: {
-        width: '100%', // Asegura que la imagen ocupe todo el ancho disponible
+        width: '100%', // Asegura que la imagen ocupe
         height: 150, // Ajusta la altura según sea necesario
         borderWidth: 1,
         borderColor: '#ccc',

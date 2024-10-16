@@ -58,6 +58,9 @@ function TabNavigator() {
     );
 }
 
+
+
+
 // Estilos desacoplados usando StyleSheet
 const styles = StyleSheet.create({
     tabBarStyle: {
