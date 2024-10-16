@@ -11,30 +11,18 @@ const ResultScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: viewData?.imagen }} style={styles.logo} />
+            <Image source={{ uri: viewData?.imageUrl }} style={styles.logo} />
 
             <View style={styles.dataContainer}>
-                <Text style={styles.title}>Descripción:</Text>
-                <Text style={styles.dataText}>{viewData.descripcion}</Text>
+                <Text style={styles.title}>Diagnostico:</Text>
+                <Text style={styles.dataText}>{viewData.diagnosticMessage}</Text>
 
-                <Text style={styles.title}>Porcentaje del semáforo:</Text>
-                <Text style={styles.dataText}>{viewData.porcentaje_semaforo}%</Text>
+                <Text style={styles.title}>Porcentaje de glaucoma:</Text>
+                <Text style={styles.dataText}>{viewData.glaucomaLikelihoodPercentage}%</Text>
 
-                <Text style={styles.title}>Áreas:</Text>
-                {viewData.areas.map((area, index) => (
-                    <Text key={index} style={styles.dataText}>
-                        {area.nombre}: {area.valor}
-                    </Text>
-                ))}
+                <Text style={styles.title}>Estado:</Text>
+                <Text style={styles.dataText}>{viewData.ddlsStage}</Text>
 
-                <Text style={styles.title}>Perímetros:</Text>
-                {viewData.perimetro.map((perimetro, index) => (
-                    <Text key={index} style={styles.dataText}>
-                        {perimetro.nombre}: {perimetro.valor}
-                    </Text>
-                ))}
-
-                <Text style={styles.dataText}>Tiempo de procesamiento: {viewData.processing_time.toFixed(2)} segundos</Text>
             </View>
         </View>
     );

@@ -1,5 +1,5 @@
 // utils/dataMapper.js
-export const mapApiResponseToViewData = (responseData) => {
+/*export const mapApiResponseToViewData = (responseData) => {
     if (!responseData) {
         return {
             imagen: '',
@@ -26,7 +26,25 @@ export const mapApiResponseToViewData = (responseData) => {
         processing_time: responseData.processing_time || 0,
     };
 };
+*/
 
+export const mapApiResponseToViewData = (responseData) => {
+    if (!responseData) {
+        return {
+            imageUrl: '',
+            diagnosticMessage: 'No hay datos disponibles.',
+            glaucomaLikelihoodPercentage: 0,
+            ddlsStage: 0,
+        };
+    }
+
+    return {
+        imageUrl: responseData.imageUrl || '',
+        diagnosticMessage: responseData.diagnosticMessage || 'Diagnostico no disponible.',
+        glaucomaLikelihoodPercentage: responseData.glaucomaLikelihoodPercentage || 0,
+        ddlsStage: responseData.ddlsStage || 0,
+    };
+};
 
 export const mapApiPatients = (responseDataPatients) => {
     if (!responseDataPatients || !Array.isArray(responseDataPatients.patients)) {

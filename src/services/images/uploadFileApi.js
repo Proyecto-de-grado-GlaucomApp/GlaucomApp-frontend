@@ -1,6 +1,6 @@
 export async function postApiLocal(imageUri) {
     try {
-        const apiUrl = process.env.EXPO + '/uploadfiles/';
+        const apiUrl = process.env.EXPO + '/glaucoma-screening/upload-image';
 
         console.log('apiUrl:  ', apiUrl);
 

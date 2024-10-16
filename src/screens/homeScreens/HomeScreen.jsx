@@ -3,8 +3,12 @@ import {View, StyleSheet, SafeAreaView} from 'react-native';
 import Header from '../../components/Header';
 import SelectionButton from '../../components/SelectionButton';
 import { pickImage, pickDocument, takePhoto } from '../../utils/imageUtils';
+import {useBackHandler} from "../../hooks/useBackHandlerHook";
 
 const HomeScreen = ({ navigation }) => {
+
+    useBackHandler();
+
     return (
         <SafeAreaView style={styles.container}>
             <Header />

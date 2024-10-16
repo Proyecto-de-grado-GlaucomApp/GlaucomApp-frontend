@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dec5df9d-c5db-421f-bca6-14c354a68804" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/hooks/useBackHandlerHook.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/navigation/appNavigator.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/navigation/stackNavigator/HomeNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/HomeNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/stackNavigator/PatientsNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/PatientsNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/stackNavigator/StackNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/stackNavigator/AuthNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/navigation/tabNavigator/TabNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/navigation/tabNavigator/TabNavigation.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/authScreens/LoginScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/authScreens/LoginScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/patientScreens/PatientDetailScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/patientScreens/PatientDetailScreen.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/imageService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/imageService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/HomeScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/HomeScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/homeScreens/ResultScreen.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/homeScreens/ResultScreen.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/images/uploadFileApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/images/uploadFileApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/dataMapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/dataMapper.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +97,7 @@
       <workItem from="1727893050760" duration="788000" />
       <workItem from="1728327725075" duration="1457000" />
       <workItem from="1728434991280" duration="979000" />
-      <workItem from="1729097406594" duration="3921000" />
+      <workItem from="1729097406594" duration="9234000" />
     </task>
     <servers />
   </component>

@@ -4,14 +4,13 @@ import HomeScreen from "../../screens/homeScreens/HomeScreen";
 import AnalyzeScreen from "../../screens/homeScreens/AnalyzeScreen";
 import LoadingScreen from "../../screens/homeScreens/LoadingScreen";
 import ResultScreen from "../../screens/homeScreens/ResultScreen";
-import {useBackHandler}  from "../../hooks/useBackHandlerHook";
 
 const Stack = createStackNavigator();
 
 
 
 const HomeNavigation = () => {
-    useBackHandler();
+
 
     return (
         <Stack.Navigator>
