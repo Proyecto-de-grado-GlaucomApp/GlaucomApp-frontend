@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function postApiLocal(imageUri) {
     try {
         const apiUrl = process.env.EXPO + '/glaucoma-screening/upload-image';
@@ -14,23 +16,18 @@ export async function postApiLocal(imageUri) {
             type: `image/${fileType}`
         });
 
-        const response = await fetch(apiUrl, {
-            method: 'POST',
+        // Realizamos la solicitud POST con axios
+        const response = await axios.post(apiUrl, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Accept': 'application/json',
             },
-            body: formData,
         });
 
-        if (!response.ok) {
-            throw new Error(`Error en la respuesta: ${response.status}`);
-        }
-
-        return await response.json();
+        return response.data;
 
     } catch (error) {
-        console.error('Error en postApiLocal:', error);
+        console.error('Error en postApiLocal con axios:', error);
         throw error;
     }
 }
