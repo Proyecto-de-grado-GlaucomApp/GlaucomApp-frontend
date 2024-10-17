@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { getPatients, getPatientById } from '../../services/patients/getApi'; // Asegúrate de que getPatientById esté importado
-import { mapApiPatients, mapApiPatientsById } from "../../utils/dataMapper";
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {getPatients, getPatientById} from '../../services/patients/getApi'; // Asegúrate de que getPatientById esté importado
+import {mapApiPatients, mapApiPatientsById} from "../../utils/dataMapper";
 import {useNavigateBackToHome} from "../../hooks/useNavigateBackToHomeHook";
 
-const PatientScreen = ({ navigation }) => {
+const PatientScreen = ({navigation}) => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -31,14 +31,14 @@ const PatientScreen = ({ navigation }) => {
         try {
             const response = await getPatientById(patientId); // Llamar a la API para obtener detalles del paciente por ID
             const mappedPatient = mapApiPatientsById(response); // Mapeamos los datos del paciente
-            navigation.navigate('PatientDetail', { patient: mappedPatient }); // Navegar a la pantalla de detalles
+            navigation.navigate('PatientDetail', {patient: mappedPatient}); // Navegar a la pantalla de detalles
         } catch (error) {
             console.error('Error fetching patient details:', error);
         }
     };
 
     // Renderizar cada paciente
-    const renderItem = ({ item }) => (
+    const renderItem = ({item}) => (
         <TouchableOpacity style={styles.item} onPress={() => handlePress(item.id)}>
             <Text style={styles.text}>{item.name}</Text>
         </TouchableOpacity>
@@ -47,12 +47,13 @@ const PatientScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (  // Mostrar el indicador de carga mientras esperamos la respuesta
-                <ActivityIndicator size="large" color="#0000ff" />
+                <ActivityIndicator size="large" color="#0000ff"/>
             ) : (
                 <FlatList
                     data={patients}
-                    keyExtractor={item => item.id.toString()}  // Asegúrate de que el id sea string
+                    keyExtractor={item => item.id.toString()}
                     renderItem={renderItem}
+                    showsVerticalScrollIndicator={false}
                 />
             )}
         </View>
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
+
     },
 });
 

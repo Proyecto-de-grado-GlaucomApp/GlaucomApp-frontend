@@ -32,7 +32,8 @@ const PatientDetailScreen = ({ route, navigation }) => {
                     keyExtractor={item => item.id.toString()}
                     renderItem={renderImageItem}
                     contentContainerStyle={styles.listContainer}
-                    numColumns={2} // Mostrar en dos columnas
+                    numColumns={2}
+                    showsVerticalScrollIndicator={false}
                 />
             ) : (
                 <Text>No hay imágenes disponibles</Text>

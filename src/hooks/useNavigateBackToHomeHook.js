@@ -8,7 +8,7 @@ export function useNavigateBackToHome(navigation) {
     React.useEffect(() => {
         const onBackPress = () => {
             if (isFocused) {
-                navigation.navigate('HomeNavigation'); // Navegar a la pantalla de inicio
+                navigation.navigate('HomeNavigation');
                 return true;
             }
             return false;

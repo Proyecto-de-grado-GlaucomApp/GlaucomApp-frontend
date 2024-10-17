@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 const PatientsNavigation = () => {
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Patient" component={PatientScreen} options={{headerTitle: 'Pacientes'}}/>
+            <Stack.Screen name="Patient" component={PatientScreen} options={{headerTitle: 'Pacientes', headerLeft: null}       }/>
             <Stack.Screen name="PatientDetail" component={PatientDetailScreen} options={{headerTitle: 'Detalles del Paciente'}}/>
         </Stack.Navigator>
     );
