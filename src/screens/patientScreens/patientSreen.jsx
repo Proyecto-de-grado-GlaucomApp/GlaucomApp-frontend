@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { getPatients, getPatientById } from '../../services/patients/getApi'; // Asegúrate de que getPatientById esté importado
 import { mapApiPatients, mapApiPatientsById } from "../../utils/dataMapper";
+import {useNavigateBackToHome} from "../../hooks/useNavigateBackToHomeHook";
 
 const PatientScreen = ({ navigation }) => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    useNavigateBackToHome(navigation);
 
     useEffect(() => {
         const fetchPatients = async () => {
