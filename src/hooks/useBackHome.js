@@ -2,7 +2,7 @@ import { useIsFocused } from "@react-navigation/native";
 import * as React from "react";
 import { BackHandler } from "react-native";
 
-export function useNavigateBackToHome(navigation) {
+export function useBackHome(navigation) {
     const isFocused = useIsFocused();
 
     React.useEffect(() => {

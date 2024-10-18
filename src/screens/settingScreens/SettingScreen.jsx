@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import {useNavigateBackToHome} from "../../hooks/useNavigateBackToHomeHook";
+import {useBackHome} from "../../hooks/useBackHome";
 
 const SettingScreen = ({ navigation }) => {
 
-    useNavigateBackToHome(navigation);
+    useBackHome(navigation);
 
     return (
         <View>

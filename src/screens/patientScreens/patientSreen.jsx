@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, View, Text, FlatList, TouchableOpacity, ActivityIndicator} from 'react-native';
-import {getPatients, getPatientById} from '../../services/patients/getApi'; // Asegúrate de que getPatientById esté importado
-import {mapApiPatients, mapApiPatientsById} from "../../utils/dataMapper";
-import {useNavigateBackToHome} from "../../hooks/useNavigateBackToHomeHook";
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { getPatients, getPatientById } from '../../services/patients/getApi';
+import { mapApiPatients, mapApiPatientsById } from '../../utils/dataMapper';
+import { useBackHome } from '../../hooks/useBackHome';
+import LoadingIndicator from "../../components/shared/LoadingIndicator";
+import PatientList from "../../components/patient/PatientList";
 
-const PatientScreen = ({navigation}) => {
+const PatientScreen = ({ navigation }) => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useNavigateBackToHome(navigation);
+    useBackHome(navigation);
 
     useEffect(() => {
         const fetchPatients = async () => {
@@ -24,37 +26,24 @@ const PatientScreen = ({navigation}) => {
         };
 
         fetchPatients();
-    }, []); // Solo se ejecuta una vez al montar el componente
+    }, []);
 
-    // Función para manejar la navegación y obtención de detalles del paciente
     const handlePress = async (patientId) => {
         try {
-            const response = await getPatientById(patientId); // Llamar a la API para obtener detalles del paciente por ID
-            const mappedPatient = mapApiPatientsById(response); // Mapeamos los datos del paciente
-            navigation.navigate('PatientDetail', {patient: mappedPatient}); // Navegar a la pantalla de detalles
+            const response = await getPatientById(patientId);
+            const mappedPatient = mapApiPatientsById(response);
+            navigation.navigate('PatientDetail', { patient: mappedPatient });
         } catch (error) {
             console.error('Error fetching patient details:', error);
         }
     };
 
-    // Renderizar cada paciente
-    const renderItem = ({item}) => (
-        <TouchableOpacity style={styles.item} onPress={() => handlePress(item.id)}>
-            <Text style={styles.text}>{item.name}</Text>
-        </TouchableOpacity>
-    );
-
     return (
         <View style={styles.container}>
-            {loading ? (  // Mostrar el indicador de carga mientras esperamos la respuesta
-                <ActivityIndicator size="large" color="#0000ff"/>
+            {loading ? (
+                <LoadingIndicator text="Cargando pacientes..." />
             ) : (
-                <FlatList
-                    data={patients}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={renderItem}
-                    showsVerticalScrollIndicator={false}
-                />
+                <PatientList patients={patients} onPatientPress={handlePress} />
             )}
         </View>
     );
@@ -65,17 +54,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 16,
         backgroundColor: '#fff',
-    },
-    item: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
-    },
-    text: {
-        fontSize: 18,
-
     },
 });
 
