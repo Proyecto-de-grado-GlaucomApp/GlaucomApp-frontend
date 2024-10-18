@@ -3,7 +3,7 @@ import {Text, TextInput, View, TouchableOpacity, StyleSheet} from "react-native"
 import React from "react";
 import {Ionicons} from '@expo/vector-icons';
 
-const FormikInputField = ({name, placeholder, iconName, secureTextEntry = false, ...props}) => {
+const InputField = ({name, placeholder, iconName, secureTextEntry = false, ...props}) => {
     const [field, meta, helpers] = useField(name);
     const [isPasswordVisible, setIsPasswordVisible] = React.useState(secureTextEntry);
 
@@ -65,4 +65,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FormikInputField;
+export default InputField;

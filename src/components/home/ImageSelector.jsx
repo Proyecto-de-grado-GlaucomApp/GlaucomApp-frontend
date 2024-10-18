@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-const SelectionButton = ({ onPress, imageSource, text }) => (
+const ImageSelector = ({ onPress, imageSource, text }) => (
     <TouchableOpacity style={styles.uploadContainer} onPress={onPress}>
         <Image source={imageSource} style={styles.uploadIcon} />
         <Text style={styles.descriptionText}>{text}</Text>
@@ -31,4 +31,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SelectionButton;
+export default ImageSelector;

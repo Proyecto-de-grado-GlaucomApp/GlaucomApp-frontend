@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import PrimaryButton from '../../components/PrimaryButton';
-import FormikInputField from '../../components/FormikInputField';
-import HeaderMain from "../../components/HeaderMain";
-import TextLink from "../../components/TextLink";
+import PrimaryButton from '../../components/shared/PrimaryButton';
+import InputField from '../../components/auth/InputField';
+import LogoHeader from "../../components/auth/LogoHeader";
+import TextLink from "../../components/auth/TextLink";
 import {Formik} from 'formik';
 import {registerSchema} from '../../validationSchemas/register';
 
@@ -24,26 +24,26 @@ export default function RegisterScreen({navigation}) {
             {({handleSubmit}) => {
                 return (
                     <View style={styles.container}>
-                        <HeaderMain />
+                        <LogoHeader />
 
-                        <FormikInputField
+                        <InputField
                             name='user'
                             placeholder='user'
                             iconName="person"
                         />
-                        <FormikInputField
+                        <InputField
                             name='email'
                             placeholder='Email'
                             iconName="mail"
                         />
-                        <FormikInputField
+                        <InputField
                             name='password'
                             placeholder='Password'
                             iconName="eye"
                             secureTextEntry={true}
                         />
 
-                        <FormikInputField
+                        <InputField
                             name='confirmPassword'
                             placeholder='Confirm Password'
                             iconName="eye"

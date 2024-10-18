@@ -1,7 +1,9 @@
+// ResultScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { mapApiResponseToViewData } from '../../utils/dataMapper';
+import DataDisplay from "../../components/home/DataDisplay";
 
 const ResultScreen = () => {
     const route = useRoute();
@@ -14,15 +16,9 @@ const ResultScreen = () => {
             <Image source={{ uri: viewData?.imageUrl }} style={styles.logo} />
 
             <View style={styles.dataContainer}>
-                <Text style={styles.title}>Diagnostico:</Text>
-                <Text style={styles.dataText}>{viewData.diagnosticMessage}</Text>
-
-                <Text style={styles.title}>Porcentaje de glaucoma:</Text>
-                <Text style={styles.dataText}>{viewData.glaucomaLikelihoodPercentage}%</Text>
-
-                <Text style={styles.title}>Estado:</Text>
-                <Text style={styles.dataText}>{viewData.ddlsStage}</Text>
-
+                <DataDisplay title="Diagnóstico:" value={viewData.diagnosticMessage} />
+                <DataDisplay title="Porcentaje de glaucoma:" value={`${viewData.glaucomaLikelihoodPercentage}%`} />
+                <DataDisplay title="Estado:" value={viewData.ddlsStage} />
             </View>
         </View>
     );
@@ -45,14 +41,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: 'flex-start',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    dataText: {
-        fontSize: 16,
-        marginBottom: 5,
-    },
 });
+
 export default ResultScreen;

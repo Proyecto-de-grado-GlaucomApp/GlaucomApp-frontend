@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {postApiLocal} from "../../services/images/uploadFileApi";
 import {MaterialIcons} from '@expo/vector-icons';
+import LoadingIndicator from "../../components/shared/LoadingIndicator";
+import ResultMessage from "../../components/home/ResultMessage";
 
 const LoadingScreen = ({navigation}) => {
     const route = useRoute();
@@ -53,19 +55,9 @@ const LoadingScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <View style={styles.loadingContainer}>
-                    <ActivityIndicator size="large" color="#0000ff"/>
-                    <Text>Procesando imagen...</Text>
-                </View>
+                <LoadingIndicator message="Procesando imagen..." />
             ) : (
-                <View style={styles.resultContainer}>
-                    {successRef.current === true ? (
-                        <MaterialIcons name="check-circle" size={50} color="green"/>
-                    ) : (
-                        <MaterialIcons name="cancel" size={50} color="red"/>
-                    )}
-                    <Text>{successRef.current === true ? 'Imagen procesada correctamente.' : 'Error al procesar la imagen.'}</Text>
-                </View>
+                <ResultMessage success={successRef.current} />
             )}
         </View>
     );
@@ -77,14 +69,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
-    },
-    loadingContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    resultContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
     },
 });
 

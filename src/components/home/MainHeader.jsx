@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Header = () => (
+const MainHeader = () => (
     <View style={styles.header}>
         <Text style={styles.welcomeText}>HOLA DE NUEVO</Text>
         <Text style={styles.nameText}>LEONARDO</Text>
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Header;
+export default MainHeader;

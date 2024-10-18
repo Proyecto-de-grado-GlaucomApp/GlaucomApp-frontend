@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
-import Header from '../../components/Header';
-import SelectionButton from '../../components/SelectionButton';
+import MainHeader from '../../components/home/MainHeader';
+import ImageSelector from '../../components/home/ImageSelector';
 import { pickImage, pickDocument, takePhoto } from '../../utils/imageUtils';
 import {useBackHandler} from "../../hooks/useBackHandlerHook";
 
@@ -11,19 +11,19 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Header />
+            <MainHeader />
             <View style={styles.containerSecond}>
-                <SelectionButton
+                <ImageSelector
                     onPress={() => pickImage(navigation)}
                     imageSource={require('../../../assets/icons/frame.png')}
                     text="Subir desde galería"
                 />
-                <SelectionButton
+                <ImageSelector
                     onPress={() => pickDocument(navigation)}
                     imageSource={require('../../../assets/icons/frame.png')}
                     text="Subir desde una aplicación"
                 />
-                <SelectionButton
+                <ImageSelector
                     onPress={() => takePhoto(navigation)}
                     imageSource={require('../../../assets/icons/frame.png')}
                     text="Tomar una Foto"

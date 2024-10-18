@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet, Alert } from 'react-native';
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../components/shared/PrimaryButton";
 import { downloadImage } from '../../utils/imageService';
+import ImageDisplay from "../../components/home/ImageDisplay";
 
 const AnalyzeScreen = ({ route, navigation }) => {
     const { imageUri } = route.params;
@@ -41,17 +42,7 @@ const AnalyzeScreen = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.imageContainer}>
-                {localImageUri ? (
-                    <Image
-                        source={{ uri: localImageUri }}
-                        style={styles.image}
-                    />
-                ) : (
-                    <View style={styles.image} />
-                )}
-            </View>
-
+            <ImageDisplay imageUri={localImageUri} />
             <View style={styles.buttonContainer}>
                 <PrimaryButton title="Realizar análisis" onPress={handlePress} />
                 <PrimaryButton title="Seleccionar otra imagen" onPress={() => navigation.goBack()} />
@@ -65,18 +56,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-    },
-    imageContainer: {
-        width: '100%',
-        height: '60%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-    },
-    image: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'contain',
     },
     buttonContainer: {
         width: '100%',
