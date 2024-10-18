@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function postApiLocal(imageUri) {
+export async function postUploadImage(imageUri) {
     try {
         const apiUrl = process.env.EXPO + '/glaucoma-screening/upload-image';
 

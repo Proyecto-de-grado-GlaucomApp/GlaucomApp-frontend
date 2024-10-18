@@ -1,8 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {View, Text, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {postApiLocal} from "../../services/images/uploadFileApi";
-import {MaterialIcons} from '@expo/vector-icons';
+import {postUploadImage} from "../../services/imageProcessingApi";
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
 import ResultMessage from "../../components/home/ResultMessage";
 
@@ -23,7 +22,7 @@ const LoadingScreen = ({navigation}) => {
 
     const loadRequest = async (imageUri) => {
         try {
-            const respuesta = await postApiLocal(imageUri);
+            const respuesta = await postUploadImage(imageUri);
             console.log('Respuesta del servidor:', respuesta);
             // Verifica si hay una imagen en la respuesta
             if (respuesta) {
