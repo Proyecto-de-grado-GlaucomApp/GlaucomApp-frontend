@@ -33,7 +33,7 @@ export default function RegisterScreen({ navigation }) {
         try {
             const message = await authApi.AuthRegister(user.name, user.username, user.password); // Llama al servicio
             Alert.alert("Éxito", message);
-            navigation.navigate('Home'); // Redirige al Home después del registro exitoso
+            navigation.navigate('Login'); // Redirige al Home después del registro exitoso
         } catch (error) {
             Alert.alert("Error", error.message); // Muestra el error
         }
