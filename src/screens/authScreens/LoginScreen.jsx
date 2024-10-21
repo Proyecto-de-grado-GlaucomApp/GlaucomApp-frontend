@@ -1,30 +1,37 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import PrimaryButton from '../../components/shared/PrimaryButton';
 import InputField from '../../components/auth/InputField';
 import LogoHeader from "../../components/auth/LogoHeader";
 import TextLink from "../../components/auth/TextLink";
-import {Formik} from 'formik';
-import {loginSchema} from '../../validationSchemas/login';
+import { Formik } from 'formik';
+import { loginSchema } from '../../validationSchemas/login';
+import authApi from '../../services/authApi';
 
-
-const initialValues   = {
-    email: '',
+const initialValues = {
+    username: '',
     password: '',
 };
 
-export default function LoginScreen({navigation}) {
-
+export default function LoginScreen({ navigation }) {
+    const handleLogin = async (values) => {
+        try {
+            await authApi.login(values.username, values.password);
+            navigation.navigate('Home'); // Navegar a la pantalla principal después de autenticarse
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        }
+    };
 
     return (
-        <Formik validationSchema={loginSchema} initialValues={initialValues} onSubmit={values => console.log(values)}>
-            {({handleSubmit}) => {
+        <Formik validationSchema={loginSchema} initialValues={initialValues} onSubmit={handleLogin}>
+            {({ handleSubmit }) => {
                 return (
                     <View style={styles.container}>
                         <LogoHeader />
 
                         <InputField
-                            name='email'
+                            name='username'
                             placeholder='Email'
                             iconName="mail"
                         />
@@ -35,9 +42,8 @@ export default function LoginScreen({navigation}) {
                             secureTextEntry={true}
                         />
 
-                        <PrimaryButton title="Iniciar Sesión" onPress={() => navigation.navigate('Home')} />
+                        <PrimaryButton title="Iniciar Sesión" onPress={handleSubmit} />
                         <TextLink title="Registrarse" onPress={() => navigation.navigate('Register')} />
-
                     </View>
                 );
             }}
@@ -53,5 +59,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
-

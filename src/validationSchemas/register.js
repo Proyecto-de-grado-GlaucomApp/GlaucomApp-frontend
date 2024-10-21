@@ -1,10 +1,10 @@
 import * as yup from "yup";
 
 export const registerSchema = yup.object().shape({
-    user: yup
+    name: yup
         .string()
         .required('Ingresa un usuario'),
-    email: yup
+    username: yup
         .string()
         .email('Ingresa un correo valido')
         .matches(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, 'Ingresa un correo valido')
