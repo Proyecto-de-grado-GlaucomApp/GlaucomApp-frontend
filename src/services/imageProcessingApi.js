@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function postUploadImage(imageUri) {
     try {
-        const apiUrl = process.env.EXPO + '/glaucoma-screening/upload-image';
+        const apiUrl = process.env.EXPO + '/mobile/glaucoma-screening/process';
 
         console.log('apiUrl:  ', apiUrl);
 

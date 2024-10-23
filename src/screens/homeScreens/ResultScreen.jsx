@@ -16,9 +16,9 @@ const ResultScreen = () => {
             <Image source={{ uri: viewData?.imageUrl }} style={styles.logo} />
 
             <View style={styles.dataContainer}>
-                <DataDisplay title="Diagnóstico:" value={viewData.diagnosticMessage} />
-                <DataDisplay title="Porcentaje de glaucoma:" value={`${viewData.glaucomaLikelihoodPercentage}%`} />
-                <DataDisplay title="Estado:" value={viewData.ddlsStage} />
+                <DataDisplay title="Relacion de distancias:" value={viewData.distanceRatio} />
+                <DataDisplay title="Relacion de perimetros:" value={`${viewData.perimeterRatio}%`} />
+                <DataDisplay title="Relacion de areas:" value={viewData.areaRatio} />
             </View>
         </View>
     );

@@ -32,17 +32,17 @@ export const mapApiResponseToViewData = (responseData) => {
     if (!responseData) {
         return {
             imageUrl: '',
-            diagnosticMessage: 'No hay datos disponibles.',
-            glaucomaLikelihoodPercentage: 0,
-            ddlsStage: 0,
+            distanceRatio: 0,
+            perimeterRatio: 0,
+            areaRatio: 0,
         };
     }
 
     return {
         imageUrl: responseData.imageUrl || '',
-        diagnosticMessage: responseData.diagnosticMessage || 'Diagnostico no disponible.',
-        glaucomaLikelihoodPercentage: responseData.glaucomaLikelihoodPercentage || 0,
-        ddlsStage: responseData.ddlsStage || 0,
+        distanceRatio: responseData.distanceRatio || 0,
+        perimeterRatio: responseData.perimeterRatio || 0,
+        areaRatio: responseData.areaRatio || 0,
     };
 };
 
