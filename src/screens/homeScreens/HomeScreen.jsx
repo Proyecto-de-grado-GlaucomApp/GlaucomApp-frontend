@@ -2,8 +2,10 @@ import React from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import MainHeader from '../../components/home/MainHeader';
 import ImageSelector from '../../components/home/ImageSelector';
-import { pickImage, pickDocument, takePhoto } from '../../utils/imageUtils';
 import {useBackExit} from "../../hooks/useBackExit";
+import {pickImage} from "../../utils/picker/imagePicker";
+import {pickDocument} from "../../utils/picker/documentPicker";
+import {takePhoto} from "../../utils/picker/cameraPicker";
 
 const HomeScreen = ({ navigation }) => {
 

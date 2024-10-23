@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { getPatients, getPatientById } from '../../services/patientsApi';
-import { mapApiPatients, mapApiPatientsById } from '../../utils/dataMapper';
 import { useBackHome } from '../../hooks/useBackHome';
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
 import PatientList from "../../components/patient/PatientList";
+import {mapApiPatients, mapApiPatientsById} from "../../utils/mappers/patientMapperApi";
 
 const PatientScreen = ({ navigation }) => {
     const [patients, setPatients] = useState([]);

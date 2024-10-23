@@ -2,14 +2,14 @@
 import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { mapApiResponseToViewData } from '../../utils/dataMapper';
 import DataDisplay from "../../components/home/DataDisplay";
+import {mapApiProcessImage} from "../../utils/mappers/ImageMapperApi";
 
 const ResultScreen = () => {
     const route = useRoute();
     const responseData = route.params?.responseData;
 
-    const viewData = mapApiResponseToViewData(responseData);
+    const viewData = mapApiProcessImage(responseData);
 
     return (
         <View style={styles.container}>

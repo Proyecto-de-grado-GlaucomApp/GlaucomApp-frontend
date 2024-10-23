@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image, StyleSheet, Alert } from 'react-native';
 import PrimaryButton from "../../components/shared/PrimaryButton";
-import { downloadImage } from '../../utils/imageService';
+import { downloadImage } from '../../utils/download/imageDownloader';
 import ImageDisplay from "../../components/home/ImageDisplay";
 
 const AnalyzeScreen = ({ route, navigation }) => {
