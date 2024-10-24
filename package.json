@@ -6,7 +6,14 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@react-native|@react-navigation|expo(nent)?|@expo(nent)?|@expo-google-fonts/roboto|@expo-google-fonts/jost|@expo-google-fonts/inter)/"
+    ]
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.3",
