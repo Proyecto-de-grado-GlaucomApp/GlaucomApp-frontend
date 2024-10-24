@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import TextLink from "../../src/components/auth/TextLink";
+import TextLink from "../../../src/components/auth/TextLink";
 
 describe('TextLink component', () => {
     const mockOnPress = jest.fn(); // Función simulada para el evento onPress
