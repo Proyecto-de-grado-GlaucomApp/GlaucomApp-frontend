@@ -11,7 +11,7 @@ const TextLink = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
     text: {
-        fontWeight: 'bold',
+        fontWeight: 'normal',
         color: '#FFFFFF',
         fontSize: 16,
         textAlign: 'center',
