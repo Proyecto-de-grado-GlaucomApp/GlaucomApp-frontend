@@ -1,4 +1,5 @@
 import axios from 'axios';
+import showErrorMessage from "../utils/messages/errorMessages";
 
 export async function getPatients() {
     try {
@@ -8,6 +9,7 @@ export async function getPatients() {
         return response.data; // Retorna los datos directamente
     } catch (error) {
         console.error('Error fetching patients:', error);
+        showErrorMessage(error);
         throw error;
     }
 }
@@ -19,6 +21,7 @@ export async function getPatientById(id) {
         return response.data; // Devuelve los datos directamente
     } catch (error) {
         console.error('Error fetching patient by id:', error);
+        showErrorMessage(error);
         throw error;
     }
 }

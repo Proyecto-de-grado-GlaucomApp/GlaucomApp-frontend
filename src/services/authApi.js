@@ -1,5 +1,6 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import showErrorMessage from "../utils/messages/errorMessages";
 
 const apiUrlLogin = "http://192.168.1.3:8000/mobile/auth/login";
 const apiUrlRegister = "http://192.168.1.3:8000/mobile/auth/register"; // URL para el registro
@@ -30,6 +31,7 @@ const authApi = {
         } catch (error) {
             // Imprimir el error completo para más detalles
             console.error('Error en login: ', error);
+            showErrorMessage(error);
             throw new Error(error.response?.data || 'Login failed');
         }
     },
@@ -50,6 +52,7 @@ const authApi = {
         } catch (error) {
             // Imprimir el error completo para más detalles
             console.error('Error en registro: ', error);
+            showErrorMessage(error);
             throw new Error(error.response?.data || 'Registration failed');
         }
     },

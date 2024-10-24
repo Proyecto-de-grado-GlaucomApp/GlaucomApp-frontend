@@ -1,5 +1,6 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import showErrorMessage from "../utils/messages/errorMessages";
 
 export async function postUploadImage(imageUri) {
     try {
@@ -38,6 +39,7 @@ export async function postUploadImage(imageUri) {
 
     } catch (error) {
         console.error('Error en postApiLocal con axios:', error);
+        showErrorMessage(error);
         throw error;
     }
 }
