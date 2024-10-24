@@ -41,7 +41,7 @@ const PatientScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {loading ? (
-                <LoadingIndicator text="Cargando pacientes..." />
+                <LoadingIndicator message="Cargando pacientes..." />
             ) : (
                 <PatientList patients={patients} onPatientPress={handlePress} />
             )}
