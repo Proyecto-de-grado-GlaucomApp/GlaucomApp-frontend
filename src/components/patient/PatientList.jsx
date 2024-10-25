@@ -1,21 +1,26 @@
+// PatientList.jsx
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import PatientItem from "./PatientItem";
+import LoadingIndicator from "../shared/LoadingIndicator";
 
-const PatientList = ({ patients, onPatientPress }) => {
+const PatientList = ({ patients, onPatientPress, onEndReached, loadingMore, loadingMoreMessage }) => {
     const renderItem = ({ item }) => (
         <PatientItem
             name={item.name}
-            onPress={() => onPatientPress(item.id)}
+            onPress={() => onPatientPress(item.PacinetId)}
         />
     );
 
     return (
         <FlatList
             data={patients}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item.PacinetId.toString()}
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={loadingMore ? <LoadingIndicator message={loadingMoreMessage} /> : null}
         />
     );
 };

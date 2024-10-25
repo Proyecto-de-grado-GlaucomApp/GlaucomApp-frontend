@@ -1,17 +1,19 @@
 export const mapApiPatients = (responseDataPatients) => {
-    if (!responseDataPatients || !Array.isArray(responseDataPatients.patients)) {
+    if (!responseDataPatients || !Array.isArray(responseDataPatients)) {
         return {
             patients: [],
         };
     }
 
     return {
-        patients: responseDataPatients.patients.map((patient) => ({
-            id: patient.id,
+        patients: responseDataPatients.map((patient) => ({
+            PacinetId: patient.PacinetId,
             name: patient.name,
+            cedula: patient.cedula,
         })),
     };
 };
+
 
 
 export const mapApiPatientsById = (responseData) => {
