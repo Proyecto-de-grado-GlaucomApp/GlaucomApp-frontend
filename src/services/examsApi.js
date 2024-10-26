@@ -1,11 +1,10 @@
-import axios from 'axios';
-import showErrorMessage from "../utils/messages/errorMessages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import showErrorMessage from "../utils/messages/errorMessages";
 
-
-export async function getPatients(startIndex = 0, endIndex = 15) {
+export async function getExams(startIndex = 0, endIndex = 15, pacientId) {
     try {
-        const apiUrl = process.env.EXPO +`/mobile/clinical_history/get/pacients?startIndex=${startIndex}&endIndex=${endIndex}`;
+        const apiUrl = process.env.EXPO +`/mobile/clinical_history/get/exams?startIndex=${startIndex}&endIndex=${endIndex}&pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -20,12 +19,11 @@ export async function getPatients(startIndex = 0, endIndex = 15) {
         };
 
         const response = await axios.get(apiUrl, { headers });
-        console.log('Fetched Patients:', response.data);
+        console.log('Fetched Exams:', response.data);
         return response.data;
     } catch (error) {
-        console.error('Error fetching patients:', error);
+        console.error('Error fetching Exams:', error);
         showErrorMessage(error);
         throw error;
     }
 }
-

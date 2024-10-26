@@ -28,8 +28,8 @@
 };
 */
 
-export const mapApiProcessImage = (responseData) => {
-    if (!responseData) {
+export const mapApiProcessImage = (responseDataImage) => {
+    if (!responseDataImage) {
         return {
             imageUrl: '',
             distanceRatio: 0,
@@ -39,9 +39,9 @@ export const mapApiProcessImage = (responseData) => {
     }
 
     return {
-        imageUrl: responseData.imageUrl || '',
-        distanceRatio: responseData.distanceRatio || 0,
-        perimeterRatio: responseData.perimeterRatio || 0,
-        areaRatio: responseData.areaRatio || 0,
+        imageUrl: responseDataImage.imageUrl || '',
+        distanceRatio: responseDataImage.distanceRatio || 0,
+        perimeterRatio: responseDataImage.perimeterRatio || 0,
+        areaRatio: responseDataImage.areaRatio || 0,
     };
 };

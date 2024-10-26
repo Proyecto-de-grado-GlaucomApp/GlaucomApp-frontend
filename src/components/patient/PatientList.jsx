@@ -8,7 +8,7 @@ const PatientList = ({ patients, onPatientPress, onEndReached, loadingMore, load
     const renderItem = ({ item }) => (
         <PatientItem
             name={item.name}
-            onPress={() => onPatientPress(item.PacinetId)}
+            onPress={() => onPatientPress(item.PacinetId, item.name, item.cedula)}
         />
     );
 

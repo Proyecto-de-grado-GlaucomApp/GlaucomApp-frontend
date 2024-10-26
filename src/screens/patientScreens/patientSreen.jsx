@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { getPatients, getPatientById } from '../../services/patientsApi';
+import { getPatients } from '../../services/patientsApi';
 import { useBackHome } from '../../hooks/useBackHome';
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
 import PatientList from "../../components/patient/PatientList";
-import { mapApiPatients, mapApiPatientsById } from "../../utils/mappers/patientMapperApi";
+import { mapApiPatients } from "../../utils/mappers/patientMapperApi";
 
 const PatientScreen = ({ navigation }) => {
     const [patients, setPatients] = useState([]);
@@ -52,15 +52,18 @@ const PatientScreen = ({ navigation }) => {
         }, [])
     );
 
-    const handlePress = async (patientId) => {
+    const handlePress = async (patientId, patientName, patientCedula) => {
         try {
-            const response = await getPatientById(patientId);
-            const mappedPatient = mapApiPatientsById(response);
-            navigation.navigate('PatientDetail', { patient: mappedPatient });
+            console.log('Patient ID:', patientId);
+            console.log('Patient Name:', patientName);
+            console.log('Patient Cedula:', patientCedula);
+            navigation.navigate('PatientDetail', { patientId: patientId, patientName: patientName, patientCedula: patientCedula });
+
         } catch (error) {
-            console.error('Error fetching patient details:', error);
+            console.error('Error navigating to patient details:', error);
         }
     };
+
 
     const handleLoadMore = () => {
         if (!loadingMore && hasMorePatients) { // Solo cargar más si hay más pacientes
