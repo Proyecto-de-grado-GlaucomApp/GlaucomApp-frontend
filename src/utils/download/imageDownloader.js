@@ -17,9 +17,9 @@ export const downloadImage = async (imageUri, setLocalImageUri, setLoading) => {
         if (imageUri && (imageUri.startsWith('http://') || imageUri.startsWith('https://'))) {
             const fileUri = FileSystem.documentDirectory + 'downloadedImage.jpg';
             const { uri } = await FileSystem.downloadAsync(imageUri, fileUri);
-            setLocalImageUri(uri); // Guarda la URI del archivo descargado
+            setLocalImageUri(uri);
         } else {
-            setLocalImageUri(imageUri); // Usa la URI proporcionada si no es una URL
+            setLocalImageUri(imageUri);
         }
     } catch (error) {
         console.error('Error downloading image:', error);

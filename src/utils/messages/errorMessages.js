@@ -2,10 +2,8 @@ import { Alert } from 'react-native';
 
 const showErrorMessage = (error) => {
     if (error.message === 'Network Error') {
-        // Manejar error de red
         Alert.alert("Error de Conexión", "No se pudo conectar con el servidor. Verifica tu conexión a internet.");
     } else if (error.response) {
-        // Manejar errores del servidor con base en el código de estado HTTP
         switch (error.response.status) {
             case 400:
                 Alert.alert("Solicitud Incorrecta", error.response.data.message || 'Parámetros incorrectos.');
@@ -26,7 +24,6 @@ const showErrorMessage = (error) => {
                 Alert.alert("Error", error.response.data.message || 'Ha ocurrido un error desconocido.');
         }
     } else {
-        // Manejar errores desconocidos
         Alert.alert("Error", 'Ha ocurrido un error desconocido. Inténtalo de nuevo.');
     }
 };

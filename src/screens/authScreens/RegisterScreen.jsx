@@ -6,7 +6,7 @@ import LogoHeader from "../../components/auth/LogoHeader";
 import TextLink from "../../components/auth/TextLink";
 import { Formik } from 'formik';
 import { registerSchema } from '../../validationSchemas/register';
-import authApi from '../../services/authApi'; // Importa el servicio actualizado
+import authApi from '../../services/authApi';
 
 const initialValues = {
     name: '',
@@ -33,9 +33,9 @@ export default function RegisterScreen({ navigation }) {
         try {
             const message = await authApi.AuthRegister(user.name, user.username, user.password); // Llama al servicio
             Alert.alert("Éxito", message);
-            navigation.navigate('Login'); // Redirige al Home después del registro exitoso
+            navigation.navigate('Login');
         } catch (error) {
-            Alert.alert("Error", error.message); // Muestra el error
+            Alert.alert("Error", error.message);
         }
     };
 

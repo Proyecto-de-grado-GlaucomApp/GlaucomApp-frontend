@@ -12,23 +12,23 @@ const PatientScreen = ({ navigation }) => {
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
-    const [hasMorePatients, setHasMorePatients] = useState(true); // Estado para controlar si hay más pacientes
+    const [hasMorePatients, setHasMorePatients] = useState(true);
     const batchSize = 15;
 
     useBackHome(navigation);
 
     const fetchPatients = async () => {
-        if (!hasMorePatients) return; // Evitar la carga si no hay más pacientes
+        if (!hasMorePatients) return;
 
         setLoadingMore(true);
         try {
             const response = await getPatients(startIndex, startIndex + batchSize);
-            console.log('API Response:', response); // Log para verificar los datos
+            console.log('API Response:', response);
             const mappedPatients = mapApiPatients(response);
-            console.log('Mapped Patients:', mappedPatients); // Log para verificar el mapeo
+            console.log('Mapped Patients:', mappedPatients);
 
             if (mappedPatients.patients.length < batchSize) {
-                setHasMorePatients(false); // No hay más pacientes por cargar
+                setHasMorePatients(false);
             }
 
             setPatients(prevPatients => [...prevPatients, ...mappedPatients.patients]);
@@ -43,11 +43,11 @@ const PatientScreen = ({ navigation }) => {
 
     useFocusEffect(
         useCallback(() => {
-            // Cada vez que la pantalla se enfoque, reinicia la lista y vuelve a cargar
+
             setPatients([]);
             setStartIndex(0);
             setLoading(true);
-            setHasMorePatients(true); // Reiniciar el estado de más pacientes
+            setHasMorePatients(true);
             fetchPatients();
         }, [])
     );
@@ -66,7 +66,7 @@ const PatientScreen = ({ navigation }) => {
 
 
     const handleLoadMore = () => {
-        if (!loadingMore && hasMorePatients) { // Solo cargar más si hay más pacientes
+        if (!loadingMore && hasMorePatients) {
             fetchPatients();
         }
     };

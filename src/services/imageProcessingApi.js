@@ -9,7 +9,6 @@ export async function postUploadImage(imageUri) {
         console.log('apiUrl:  ', apiUrl);
 
 
-        // Recuperar el token del AsyncStorage
         const token = await AsyncStorage.getItem('token');
         if (!token) {
             throw new Error('No token found. Please log in again.');
@@ -26,7 +25,6 @@ export async function postUploadImage(imageUri) {
             type: `image/${fileType}`
         });
 
-        // Realizamos la solicitud POST con axios
         const response = await axios.post(apiUrl, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',

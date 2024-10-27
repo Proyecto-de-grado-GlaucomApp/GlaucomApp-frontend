@@ -11,7 +11,6 @@ const authApi = {
             console.log("apiUrlLogin: ", apiUrlLogin);
             const response = await axios.post(apiUrlLogin, { username, password }, { withCredentials: true });
 
-            // Imprimir toda la respuesta para depuración
             console.log("Respuesta del servidor (login): ", response);
 
             // Verificar si hay cookies en la respuesta
@@ -20,16 +19,14 @@ const authApi = {
                 throw new Error('No token found in response');
             }
 
-            // Extraer el token de la cookie
+            // Extraccion de la coocke
             const token = tokenCookie.split(';')[0].split('=')[1];
             console.log("Token recibido (login): ", token);
 
-            // Guardar el token JWT en AsyncStorage
             await AsyncStorage.setItem('token', token);
 
-            return response.data; // Devuelve los datos recibidos
+            return response.data;
         } catch (error) {
-            // Imprimir el error completo para más detalles
             console.error('Error en login: ', error);
             showErrorMessage(error);
             throw new Error(error.response?.data || 'Login failed');
@@ -40,17 +37,14 @@ const authApi = {
         try {
             console.log("apiUrlRegister: ", apiUrlRegister);
 
-            // Imprimir los datos que se enviarán al servidor
             console.log("Datos a enviar: ", { name, username, password });
 
             const response = await axios.post(apiUrlRegister, { name, username, password });
 
-            // Imprimir toda la respuesta para depuración
             console.log("Respuesta del servidor (register): ", response);
 
-            return response.data; // Devuelve los datos recibidos
+            return response.data;
         } catch (error) {
-            // Imprimir el error completo para más detalles
             console.error('Error en registro: ', error);
             showErrorMessage(error);
             throw new Error(error.response?.data || 'Registration failed');

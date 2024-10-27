@@ -24,25 +24,25 @@ const LoadingScreen = ({navigation}) => {
         try {
             const respuesta = await postUploadImage(imageUri);
             console.log('Respuesta del servidor:', respuesta);
-            // Verifica si hay una imagen en la respuesta
+
             if (respuesta) {
-                successRef.current = true; // Actualiza el valor de referencia
-                responseDataRef.current = respuesta; // Guarda la respuesta
+                successRef.current = true;
+                responseDataRef.current = respuesta;
                 console.log('Entro aqui True');
             } else {
-                successRef.current = false; // Actualiza el valor de referencia
+                successRef.current = false;
                 console.log('Entro aqui False');
             }
         } catch (error) {
             console.log('Error al enviar la imagen:', error);
-            successRef.current = false; // Actualiza el valor de referencia
+            successRef.current = false;
         } finally {
             setLoading(false);
             setTimeout(() => {
-                const success = successRef.current; // Lee el valor actualizado de success
+                const success = successRef.current;
                 console.log('success:', success);
                 if (success === true) {
-                    // Navegar a ResultScreen y pasar la respuesta
+
                     navigation.navigate('Result', { responseData: responseDataRef.current });
                 } else {
                     navigation.navigate('Home');

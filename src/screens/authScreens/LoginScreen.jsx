@@ -17,7 +17,7 @@ export default function LoginScreen({ navigation }) {
     const handleLogin = async (values) => {
         try {
             await authApi.login(values.username, values.password);
-            navigation.navigate('Home'); // Navegar a la pantalla principal después de autenticarse
+            navigation.navigate('Home');
         } catch (error) {
             Alert.alert('Error', error.message);
         }

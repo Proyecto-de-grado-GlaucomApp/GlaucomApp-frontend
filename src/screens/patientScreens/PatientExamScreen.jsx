@@ -27,7 +27,7 @@ const PatientExamScreen = () => {
                     text: "Sí, borrar",
                     onPress: async () => {
                         try {
-                            await deleteExam(examId, patientId); // Llama a la función de eliminación del examen
+                            await deleteExam(examId, patientId);
                             Alert.alert("Éxito", "Examen eliminado correctamente.");
                             navigation.goBack( );
                         } catch (error) {

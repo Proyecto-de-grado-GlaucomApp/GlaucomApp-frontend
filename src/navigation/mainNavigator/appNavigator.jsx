@@ -9,14 +9,12 @@ import AuthNavigation from "../stackNavigator/AuthNavigation";
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
-    // Aquí puedes gestionar el estado de autenticación del usuario
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Este efecto simularía una verificación de autenticación al abrir la app
+    // simulaciond e autenticacion
     useEffect(() => {
-        // Aquí iría la lógica para verificar si el usuario está autenticado
-        // Por ejemplo, revisando si hay un token guardado en el dispositivo
-        // Por ahora, lo dejamos en `false` para que muestre el login primero
+        // lógica para verificar si el usuario está autenticado
+
     }, []);
 
     return (

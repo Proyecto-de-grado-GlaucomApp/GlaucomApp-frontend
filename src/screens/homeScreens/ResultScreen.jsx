@@ -1,24 +1,44 @@
-// ResultScreen.js
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import DataDisplay from "../../components/home/DataDisplay";
-import {mapApiProcessImage} from "../../utils/mappers/ImageMapperApi";
+import { mapApiProcessImage } from "../../utils/mappers/ImageMapperApi";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const ResultScreen = () => {
     const route = useRoute();
+    const navigation = useNavigation();
     const responseData = route.params?.responseData;
 
     const viewData = mapApiProcessImage(responseData);
+
+    const handleSave = () => {
+        console.log('Guardado');
+
+    };
+
+    const handleDiscard = () => {
+        navigation.navigate('Home');
+    };
 
     return (
         <View style={styles.container}>
             <Image source={{ uri: viewData?.imageUrl }} style={styles.logo} />
 
             <View style={styles.dataContainer}>
-                <DataDisplay title="Relacion de distancias:" value={viewData.distanceRatio} />
-                <DataDisplay title="Relacion de perimetros:" value={`${viewData.perimeterRatio}%`} />
-                <DataDisplay title="Relacion de areas:" value={viewData.areaRatio} />
+                <DataDisplay title="Relación de distancias:" value={viewData.distanceRatio} />
+                <DataDisplay title="Relación de perímetros:" value={`${viewData.perimeterRatio}%`} />
+                <DataDisplay title="Relación de áreas:" value={viewData.areaRatio} />
+            </View>
+
+            {/* Iconos para guardar y descartar */}
+            <View style={styles.iconContainer}>
+                <TouchableOpacity onPress={handleSave} style={styles.iconButton}>
+                    <Icon name="save" size={30} color="#769BCE" />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleDiscard} style={styles.iconButton}>
+                    <Icon name="cancel" size={30} color="#769BCE" />
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -40,6 +60,16 @@ const styles = StyleSheet.create({
     dataContainer: {
         marginTop: 20,
         alignItems: 'flex-start',
+    },
+    iconContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        position: 'absolute',
+        bottom: 30,
+        width: '100%',
+    },
+    iconButton: {
+        padding: 10,
     },
 });
 
