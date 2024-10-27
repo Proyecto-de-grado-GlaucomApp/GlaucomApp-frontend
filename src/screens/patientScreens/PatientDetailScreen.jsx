@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getExams } from "../../services/examsApi";
 import { mapApiExams } from "../../utils/mappers/examMapperApi";
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
+import { deletePatient } from "../../services/patientsApi"; // Asegúrate de que la ruta sea correcta
 
 const PatientDetailScreen = ({ route, navigation }) => {
     const { patientId, patientName, patientCedula } = route.params;
@@ -10,22 +12,18 @@ const PatientDetailScreen = ({ route, navigation }) => {
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [startIndex, setStartIndex] = useState(0);
-    const [hasMoreExams, setHasMoreExams] = useState(true); // Estado para controlar si hay más exámenes
+    const [hasMoreExams, setHasMoreExams] = useState(true);
     const batchSize = 6;
 
-    // Función para cargar exámenes
     const fetchExams = async () => {
-        if (!hasMoreExams) return; // Evita cargar si no hay más exámenes
-
+        if (!hasMoreExams) return;
         setLoadingMore(true);
         try {
             const response = await getExams(startIndex, startIndex + batchSize, patientId);
             const mappedExams = mapApiExams(response);
-
             if (mappedExams.exams.length < batchSize) {
-                setHasMoreExams(false); // No hay más exámenes por cargar
+                setHasMoreExams(false);
             }
-
             setExams(prevExams => [...prevExams, ...mappedExams.exams]);
             setStartIndex(prevIndex => prevIndex + batchSize);
         } catch (error) {
@@ -44,10 +42,9 @@ const PatientDetailScreen = ({ route, navigation }) => {
         fetchExams();
     }, [patientId]);
 
-    const handleImagePress = (image) => {
-        console.log('Imagen seleccionada:', image);
-        // Ejemplo de navegación a otra pantalla:
-        // navigation.navigate('ImageDetailScreen', { image });
+    const handleImagePress = (examId) => {
+        console.log('Exam ID:', examId, 'Patient ID:', patientId);
+        navigation.navigate('PatientExam', { examId, patientId });
     };
 
     const handleLoadMore = () => {
@@ -56,8 +53,34 @@ const PatientDetailScreen = ({ route, navigation }) => {
         }
     };
 
+    const confirmDelete = () => {
+        Alert.alert(
+            "Confirmar eliminación",
+            "¿Estás seguro de que deseas borrar este paciente?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Sí, borrar",
+                    onPress: async () => {
+                        try {
+                            await deletePatient(patientId); // Llama a la función de eliminación
+                            Alert.alert("Éxito", "Paciente eliminado correctamente.");
+                            navigation.goBack(); // Regresa a la pantalla anterior
+                        } catch (error) {
+                            console.error('Error deleting patient:', error);
+                            Alert.alert("Error", "No se pudo eliminar el paciente.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
     const renderImageItem = ({ item }) => (
-        <TouchableOpacity style={styles.imageContainer} onPress={() => handleImagePress(item)}>
+        <TouchableOpacity style={styles.imageContainer} onPress={() => handleImagePress(item.examId)}>
             <Image source={{ uri: item.urlImage }} style={styles.image} />
             <View style={styles.imageTextContainer}>
                 <Text style={styles.imageName}>{item.name}</Text>
@@ -68,8 +91,15 @@ const PatientDetailScreen = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{patientName}</Text>
-            <Text style={styles.subtitle}>C.C: {patientCedula}</Text>
+            <View style={styles.header}>
+                <View>
+                    <Text style={styles.title}>{patientName}</Text>
+                    <Text style={styles.subtitle}>C.C: {patientCedula}</Text>
+                </View>
+                <TouchableOpacity onPress={confirmDelete} style={styles.deleteIcon}>
+                    <Icon name="delete-outline" size={28} color="#769BCE" />
+                </TouchableOpacity>
+            </View>
 
             {loading ? (
                 <ActivityIndicator size="large" color="#0000ff" />
@@ -83,7 +113,7 @@ const PatientDetailScreen = ({ route, navigation }) => {
                     showsVerticalScrollIndicator={false}
                     onEndReached={handleLoadMore}
                     onEndReachedThreshold={0.5}
-                    ListFooterComponent={loadingMore ? <LoadingIndicator message="Cargando examenes..." /> : null}
+                    ListFooterComponent={loadingMore ? <LoadingIndicator message="Cargando exámenes..." /> : null}
                 />
             ) : (
                 <Text>No hay exámenes disponibles</Text>
@@ -98,14 +128,21 @@ const styles = StyleSheet.create({
         padding: 16,
         backgroundColor: '#fff',
     },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 10,
     },
     subtitle: {
         fontSize: 18,
-        marginBottom: 20,
+    },
+    deleteIcon: {
+        padding: 8,
     },
     imageContainer: {
         flexBasis: '50%',
