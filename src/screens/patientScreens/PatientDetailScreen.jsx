@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { getExams } from "../../services/examsApi";
 import { mapApiExams } from "../../utils/mappers/examMapperApi";
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
-import { deletePatient } from "../../services/patientsApi"; // Asegúrate de que la ruta sea correcta
+import { deletePatient } from "../../services/patientsApi";
+import {useFocusEffect} from "@react-navigation/native";
 
 const PatientDetailScreen = ({ route, navigation }) => {
     const { patientId, patientName, patientCedula } = route.params;
@@ -34,13 +35,17 @@ const PatientDetailScreen = ({ route, navigation }) => {
         }
     };
 
-    useEffect(() => {
-        setExams([]);
-        setStartIndex(0);
-        setLoading(true);
-        setHasMoreExams(true);
-        fetchExams();
-    }, [patientId]);
+    useFocusEffect(
+        React.useCallback(() => {
+            setExams([]);
+            setStartIndex(0);
+            setLoading(true);
+            setHasMoreExams(true);
+            fetchExams();
+        }, [patientId])
+    );
+
+
 
     const handleImagePress = (examId) => {
         console.log('Exam ID:', examId, 'Patient ID:', patientId);
@@ -53,7 +58,7 @@ const PatientDetailScreen = ({ route, navigation }) => {
         }
     };
 
-    const confirmDelete = () => {
+    const confirmDeletePatient = () => {
         Alert.alert(
             "Confirmar eliminación",
             "¿Estás seguro de que deseas borrar este paciente?",
@@ -96,7 +101,7 @@ const PatientDetailScreen = ({ route, navigation }) => {
                     <Text style={styles.title}>{patientName}</Text>
                     <Text style={styles.subtitle}>C.C: {patientCedula}</Text>
                 </View>
-                <TouchableOpacity onPress={confirmDelete} style={styles.deleteIcon}>
+                <TouchableOpacity onPress={confirmDeletePatient} style={styles.deleteIcon}>
                     <Icon name="delete-outline" size={28} color="#769BCE" />
                 </TouchableOpacity>
             </View>

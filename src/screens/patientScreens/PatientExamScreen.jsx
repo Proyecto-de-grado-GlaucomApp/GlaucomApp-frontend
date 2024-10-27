@@ -1,27 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Image, ActivityIndicator } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { getExamById } from "../../services/examsApi";
+import { View, StyleSheet, Image, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { getExamById, deleteExam } from "../../services/examsApi";
 import { mapApiExamById } from "../../utils/mappers/examMapperApi";
 import DataDisplay from "../../components/home/DataDisplay";
 
 const PatientExamScreen = () => {
     const route = useRoute();
+    const navigation = useNavigation();
     const { examId, patientId } = route.params;
 
     const [examData, setExamData] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    const confirmDeleteExam = () => {
+        Alert.alert(
+            "Confirmar eliminación",
+            "¿Estás seguro de que deseas borrar este examen?",
+            [
+                {
+                    text: "Cancelar",
+                    style: "cancel"
+                },
+                {
+                    text: "Sí, borrar",
+                    onPress: async () => {
+                        try {
+                            await deleteExam(examId, patientId); // Llama a la función de eliminación del examen
+                            Alert.alert("Éxito", "Examen eliminado correctamente.");
+                            navigation.goBack( );
+                        } catch (error) {
+                            console.error('Error deleting exam:', error);
+                            Alert.alert("Error", "No se pudo eliminar el examen.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
     useEffect(() => {
         const fetchExamData = async () => {
             try {
                 const response = await getExamById(examId, patientId);
-                console.log("API response:", response); // Verifica los datos obtenidos de la API
-
                 const mappedData = mapApiExamById(response);
-                console.log("Mapped exam data:", mappedData); // Verifica los datos después de mapeo
-
-                setExamData(mappedData); // Cambié `mappedData.exams` a `mappedData` si es un objeto directo
+                setExamData(mappedData);
             } catch (error) {
                 console.error("Error fetching exam data:", error);
             } finally {
@@ -36,10 +60,12 @@ const PatientExamScreen = () => {
         return <ActivityIndicator size="large" color="#0000ff" />;
     }
 
-    console.log("Exam data state:", examData);
-
     return (
         <View style={styles.container}>
+            <TouchableOpacity style={styles.deleteIcon} onPress={confirmDeleteExam}>
+                <Icon name="delete-outline" size={28} color="#769BCE" />
+            </TouchableOpacity>
+
             <Image source={{ uri: examData?.urlImage }} style={styles.logo} />
             <View style={styles.dataContainer}>
                 <DataDisplay title="Relación de distancias:" value={examData?.distanceRatio} />
@@ -56,6 +82,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#fff',
+    },
+    deleteIcon: {
+        position: 'absolute',
+        top: 16,
+        right: 16,
+        zIndex: 1,
     },
     logo: {
         width: 200,
