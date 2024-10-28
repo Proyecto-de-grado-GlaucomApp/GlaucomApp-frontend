@@ -3,13 +3,17 @@ import { View, Text, TextInput, Alert, StyleSheet } from 'react-native';
 import PrimaryButton from "../../components/shared/PrimaryButton";
 import { getPatientByCedula, savePatient } from "../../services/patientsApi";
 import { mapApiPatientsCedula } from "../../utils/mappers/patientMapperApi";
+import {saveExam} from "../../services/examsApi";
 
-const SaveResultScreen = ({ navigation }) => {
+const SaveResultScreen = ({ navigation , route}) => {
     const [cedula, setCedula] = useState('');
     const [nombrePaciente, setNombrePaciente] = useState('');
     const [examenNombre, setExamenNombre] = useState('');
     const [pacienteExistente, setPacienteExistente] = useState(null);
     const [showNombreField, setShowNombreField] = useState(false);
+
+    const { imageId, distanceRatio, perimeterRatio, areaRatio } = route.params;
+
 
     // Verificar si el paciente existe en el sistema
     const verificarPaciente = async () => {
@@ -64,13 +68,39 @@ const SaveResultScreen = ({ navigation }) => {
     };
 
     // Guardar el examen del paciente
-    const guardarExamen = () => {
+    const guardarExamen = async () => {
         if (!pacienteExistente) {
             Alert.alert("Error", "Primero debes crear o verificar un paciente.");
             return;
         }
-        Alert.alert("Examen guardado", "El examen ha sido guardado exitosamente.");
-        navigation.navigate("Home");
+
+        try {
+            console.log("Datos para guardar el examen:", {
+                cedula,
+                name: examenNombre,
+                urlImage: imageId,
+                distanceRatio,
+                perimeterRatio,
+                areaRatio
+            });
+
+            const result = await saveExam({
+                cedula,
+                name: examenNombre,
+                urlImage: imageId,
+                distanceRatio,
+                perimeterRatio,
+                areaRatio
+            });
+
+            console.log("Resultado al guardar el examen:", result);
+
+            Alert.alert("Examen guardado", "El examen ha sido guardado exitosamente.");
+            navigation.navigate("Home");
+        } catch (error) {
+            console.error("Error guardando examen:", error);
+            Alert.alert("Error", "No se pudo guardar el examen.");
+        }
     };
 
     return (

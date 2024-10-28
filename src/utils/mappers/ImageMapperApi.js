@@ -32,6 +32,7 @@ export const mapApiProcessImage = (responseDataImage) => {
     if (!responseDataImage) {
         return {
             imageUrl: '',
+            imageId: '',
             distanceRatio: 0,
             perimeterRatio: 0,
             areaRatio: 0,
@@ -40,6 +41,7 @@ export const mapApiProcessImage = (responseDataImage) => {
 
     return {
         imageUrl: responseDataImage.imageUrl || '',
+        imageId: responseDataImage.imageId || '',
         distanceRatio: responseDataImage.distanceRatio || 0,
         perimeterRatio: responseDataImage.perimeterRatio || 0,
         areaRatio: responseDataImage.areaRatio || 0,

@@ -11,10 +11,17 @@ const ResultScreen = () => {
     const navigation = useNavigation();
     const responseData = route.params?.responseData;
 
+
     const viewData = mapApiProcessImage(responseData);
 
-    const handleSave = (  ) => {
-        navigation.navigate('SaveResult', { responseData });
+    const handleSave = () => {
+        console.log('viewData:', viewData);
+        navigation.navigate('SaveResult', {
+            imageId: viewData.imageId,
+            distanceRatio: viewData.distanceRatio,
+            perimeterRatio: viewData.perimeterRatio,
+            areaRatio: viewData.areaRatio,
+        });
     };
 
     const handleDiscard = () => {

@@ -86,7 +86,7 @@ export async function deleteExam(examId, pacientId) {
 import { format } from 'date-fns';
 
 export const saveExam = async ({ cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio }) => {
-    const date = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss"); // Fecha en formato ISO, ajustable según tu API
+    const date = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss");
 
     const examenData = {
         cedula,
@@ -98,23 +98,32 @@ export const saveExam = async ({ cedula, name, urlImage, distanceRatio, perimete
         areaRatio
     };
 
+    const token = await AsyncStorage.getItem('token');
+
     try {
         const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/exam", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(examenData)
         });
 
+        // Leer la respuesta como texto
+        const responseBody = await response.text();
+        console.log("Respuesta cruda de la API:", responseBody);
+
+        // Verificar si la respuesta fue exitosa
         if (!response.ok) {
             throw new Error('Error al guardar el examen');
         }
 
-        const data = await response.json();
-        return data;
+        // Devolver la respuesta cruda
+        return responseBody; // Puedes modificar esto si decides cambiar la respuesta del servidor
     } catch (error) {
         console.error("Error en guardarExamen:", error);
-        throw error;
+        throw error; // Propagar el error para manejo posterior
     }
 };
+
