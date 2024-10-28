@@ -1,5 +1,5 @@
 import * as ImagePicker from "expo-image-picker";
-import {Alert} from "react-native";
+import { Alert } from "react-native";
 
 export const takePhoto = async (navigation) => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
@@ -15,6 +15,7 @@ export const takePhoto = async (navigation) => {
     });
 
     if (!result.canceled && result.assets.length > 0) {
+        console.log('Foto tomada, URI:', result.assets[0].uri);
         navigation.navigate('Analyze', { imageUri: result.assets[0].uri });
     } else if (result.canceled) {
         Alert.alert('Cancelado', 'Foto Cancelada');

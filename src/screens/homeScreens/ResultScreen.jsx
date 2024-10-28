@@ -5,6 +5,7 @@ import DataDisplay from "../../components/home/DataDisplay";
 import { mapApiProcessImage } from "../../utils/mappers/ImageMapperApi";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+
 const ResultScreen = () => {
     const route = useRoute();
     const navigation = useNavigation();
@@ -12,9 +13,8 @@ const ResultScreen = () => {
 
     const viewData = mapApiProcessImage(responseData);
 
-    const handleSave = () => {
-        console.log('Guardado');
-
+    const handleSave = (  ) => {
+        navigation.navigate('SaveResult', { responseData });
     };
 
     const handleDiscard = () => {
@@ -31,7 +31,6 @@ const ResultScreen = () => {
                 <DataDisplay title="Relación de áreas:" value={viewData.areaRatio} />
             </View>
 
-            {/* Iconos para guardar y descartar */}
             <View style={styles.iconContainer}>
                 <TouchableOpacity onPress={handleSave} style={styles.iconButton}>
                     <Icon name="save" size={30} color="#769BCE" />
@@ -43,6 +42,7 @@ const ResultScreen = () => {
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {

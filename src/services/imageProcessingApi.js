@@ -4,7 +4,7 @@ import showErrorMessage from "../utils/messages/errorMessages";
 
 export async function postUploadImage(imageUri) {
     try {
-        const apiUrl = process.env.EXPO + '/mobile/glaucoma-screening/process';
+        const apiUrl = 'http://192.168.1.3:8000/mobile/glaucoma-screening/process';
 
         console.log('apiUrl:  ', apiUrl);
 
@@ -15,9 +15,18 @@ export async function postUploadImage(imageUri) {
         }
         console.log('token-getItem:  ', token);
 
+
+
+        // Confirmar que imageUri es válido
+        console.log('URI de la imagen:', imageUri);
+
+
         const formData = new FormData();
         const filename = imageUri.split('/').pop();
         const fileType = filename.split('.').pop();
+
+        console.log('Nombre del archivo:', filename);
+        console.log('Tipo de archivo:', fileType);
 
         formData.append('file', {
             uri: imageUri,
