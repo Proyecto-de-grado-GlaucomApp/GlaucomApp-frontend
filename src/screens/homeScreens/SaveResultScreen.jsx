@@ -1,89 +1,111 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Alert, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, TextInput, Alert, StyleSheet} from 'react-native';
 import PrimaryButton from "../../components/shared/PrimaryButton";
-import { getPatientByCedula, savePatient } from "../../services/patientsApi";
-import { mapApiPatientsCedula } from "../../utils/mappers/patientMapperApi";
+import {getPatientByCedula, savePatient} from "../../services/patientsApi";
 import {saveExam} from "../../services/examsApi";
+import * as yup from 'yup';
 
-const SaveResultScreen = ({ navigation , route}) => {
+const patientSchema = yup.object().shape({
+    cedula: yup
+        .string()
+        .required('Ingresa una cédula')
+        .min(4, 'La cédula debe tener al menos 4 dígitos'),
+
+    name: yup
+        .string()
+        .required('Ingresa un nombre')
+        .min(3, 'El nombre debe tener al menos 3 caracteres')
+        .max(30, 'El nombre debe tener como máximo 30 caracteres')
+});
+
+const examSchema = yup.object().shape({
+    name: yup
+        .string()
+        .required('Ingresa un nombre')
+        .min(3, 'El nombre debe tener al menos 4 caracteres')
+        .max(30, 'El nombre debe tener como máximo 30 caracteres')
+});
+
+const SaveResultScreen = ({navigation, route}) => {
     const [cedula, setCedula] = useState('');
     const [nombrePaciente, setNombrePaciente] = useState('');
     const [examenNombre, setExamenNombre] = useState('');
     const [pacienteExistente, setPacienteExistente] = useState(null);
     const [showNombreField, setShowNombreField] = useState(false);
+    const [errors, setErrors] = useState({});
 
-    const { imageId, distanceRatio, perimeterRatio, areaRatio } = route.params;
+    const {imageId, distanceRatio, perimeterRatio, areaRatio} = route.params;
 
+    // Validar campos usando Yup
+    const validateField = async (field, value) => {
+        try {
+            await patientSchema.validateAt(field, {[field]: value});
+            setErrors((prevErrors) => ({...prevErrors, [field]: ''}));
+        } catch (error) {
+            setErrors((prevErrors) => ({...prevErrors, [field]: error.message}));
+        }
+    };
 
-    // Verificar si el paciente existe en el sistema
     const verificarPaciente = async () => {
+
+        if (!cedula.trim()) {
+            Alert.alert("Error", "Por favor, ingresa una cédula.");
+            return;
+        }
+
+        await validateField('cedula', cedula);
+        if (errors.cedula) return;
+
         try {
             const response = await getPatientByCedula(cedula);
-
-            // Verifica si la respuesta contiene un paciente
             if (response && response.PacinetId) {
                 setPacienteExistente(true);
                 Alert.alert("Paciente encontrado", "Puedes proceder a guardar el examen.");
             } else {
                 setPacienteExistente(false);
-                Alert.alert(
-                    "Paciente no encontrado",
-                    "¿Quieres crear un nuevo paciente?",
-                    [
-                        { text: "Cancelar", onPress: () => setShowNombreField(false), style: "cancel" },
-                        { text: "OK", onPress: () => setShowNombreField(true) }
-                    ]
-                );
+                Alert.alert("Paciente no encontrado", "¿Quieres crear un nuevo paciente?", [
+                    {text: "No", onPress: () => setShowNombreField(false), style: "cancel"},
+                    {text: "Si", onPress: () => setShowNombreField(true)}
+                ]);
             }
         } catch (error) {
-            console.error("Error verificando paciente:", error);
-            if (error.response?.status === 404) {
-                setPacienteExistente(false);
-                Alert.alert(
-                    "Paciente no encontrado",
-                    "¿Quieres crear un nuevo paciente?",
-                    [
-                        { text: "Cancelar", onPress: () => setShowNombreField(false), style: "cancel" },
-                        { text: "OK", onPress: () => setShowNombreField(true) }
-                    ]
-                );
-            } else {
-                Alert.alert("Error", "No se pudo verificar el paciente.");
-            }
+            Alert.alert("Error", "No se pudo verificar el paciente.");
         }
     };
 
-
-    // Crear un nuevo paciente en caso de no existencia
     const crearPaciente = async () => {
+        if (!nombrePaciente.trim()) {
+            Alert.alert("Error", "Por favor, ingresa el nombre del paciente.");
+            return;
+        }
+
+        await validateField('name', nombrePaciente);
+        if (errors.name) return;
+
         try {
-            const response = await savePatient({ name: nombrePaciente, cedula });
+            const response = await savePatient({name: nombrePaciente, cedula});
             Alert.alert("Paciente creado", response.message || "El paciente se ha creado exitosamente.");
             setPacienteExistente(true);
             setShowNombreField(false);
         } catch (error) {
-            console.error("Error creando paciente:", error);
             Alert.alert("Error", "No se pudo crear el paciente.");
         }
     };
 
-    // Guardar el examen del paciente
     const guardarExamen = async () => {
+
         if (!pacienteExistente) {
             Alert.alert("Error", "Primero debes crear o verificar un paciente.");
             return;
         }
 
-        try {
-            console.log("Datos para guardar el examen:", {
-                cedula,
-                name: examenNombre,
-                urlImage: imageId,
-                distanceRatio,
-                perimeterRatio,
-                areaRatio
-            });
+        if (!examenNombre.trim()) {
+            Alert.alert("Error", "Por favor, ingresa nombre para el examen.");
+            return;
+        }
 
+
+        try {
             const result = await saveExam({
                 cedula,
                 name: examenNombre,
@@ -92,13 +114,9 @@ const SaveResultScreen = ({ navigation , route}) => {
                 perimeterRatio,
                 areaRatio
             });
-
-            console.log("Resultado al guardar el examen:", result);
-
             Alert.alert("Examen guardado", "El examen ha sido guardado exitosamente.");
             navigation.navigate("Home");
         } catch (error) {
-            console.error("Error guardando examen:", error);
             Alert.alert("Error", "No se pudo guardar el examen.");
         }
     };
@@ -110,10 +128,15 @@ const SaveResultScreen = ({ navigation , route}) => {
                 style={styles.input}
                 placeholder="Ingresa la cédula"
                 value={cedula}
-                onChangeText={setCedula}
+                onChangeText={(value) => {
+                    setCedula(value);
+                    validateField('cedula', value);
+                }}
                 keyboardType="numeric"
             />
-            <PrimaryButton title="Verificar Paciente" onPress={verificarPaciente} />
+            {errors.cedula && <Text style={styles.errorText}>{errors.cedula}</Text>}
+
+            <PrimaryButton title="Verificar Paciente" onPress={verificarPaciente}/>
 
             {showNombreField && (
                 <>
@@ -122,9 +145,14 @@ const SaveResultScreen = ({ navigation , route}) => {
                         style={styles.input}
                         placeholder="Ingresa el nombre"
                         value={nombrePaciente}
-                        onChangeText={setNombrePaciente}
+                        onChangeText={(value) => {
+                            setNombrePaciente(value);
+                            validateField('name', value);
+                        }}
                     />
-                    <PrimaryButton title="Guardar Paciente" onPress={crearPaciente} />
+                    {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
+
+                    <PrimaryButton title="Guardar Paciente" onPress={crearPaciente}/>
                 </>
             )}
 
@@ -139,7 +167,7 @@ const SaveResultScreen = ({ navigation , route}) => {
             <PrimaryButton
                 title="Guardar Examen"
                 onPress={guardarExamen}
-                disabled={!pacienteExistente} // Deshabilita si no hay paciente verificado
+                disabled={!pacienteExistente}
             />
         </View>
     );
@@ -162,6 +190,11 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginTop: 10,
+    },
+    errorText: {
+        color: '#769BCE',
+        fontSize: 14,
+        marginTop: 5,
     },
 });
 

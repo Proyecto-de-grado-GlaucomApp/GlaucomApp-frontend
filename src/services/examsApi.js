@@ -57,7 +57,7 @@ export async function getExamById(examId, pacientId) {
 
 export async function deleteExam(examId, pacientId) {
     try {
-        const apiUrl = process.env.EXPO +`/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
+        const apiUrl = process.env.EXPO + `/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -72,7 +72,7 @@ export async function deleteExam(examId, pacientId) {
             'Content-Type': 'application/json',
         };
 
-        const response = await axios.delete(apiUrl, { headers });
+        const response = await axios.delete(apiUrl, {headers});
         console.log('Deleted Exam:', response.data);
         return response.data;
     } catch (error) {
@@ -83,10 +83,11 @@ export async function deleteExam(examId, pacientId) {
 }
 
 
-import { format } from 'date-fns';
+import {format} from 'date-fns';
+import {Alert} from "react-native";
 
-export const saveExam = async ({ cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio }) => {
-    const date = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss");
+export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio}) => {
+    const date = format(new Date(), "yyyy-MM-dd");
 
     const examenData = {
         cedula,
@@ -99,6 +100,9 @@ export const saveExam = async ({ cedula, name, urlImage, distanceRatio, perimete
     };
 
     const token = await AsyncStorage.getItem('token');
+    if (!token) {
+        throw new Error('No token found. Please log in again.');
+    }
 
     try {
         const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/exam", {
@@ -113,6 +117,7 @@ export const saveExam = async ({ cedula, name, urlImage, distanceRatio, perimete
         // Leer la respuesta como texto
         const responseBody = await response.text();
         console.log("Respuesta cruda de la API:", responseBody);
+
 
         // Verificar si la respuesta fue exitosa
         if (!response.ok) {

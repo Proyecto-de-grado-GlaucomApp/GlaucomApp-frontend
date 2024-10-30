@@ -101,31 +101,31 @@ export const savePatient = async ({ name, cedula }) => {
             throw new Error('No token found. Please log in again.');
         }
 
-        const response = await axios.post("http://192.168.1.3:8000/mobile/clinical_history/save/pacient", pacienteData, {
+        const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/pacient", {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify(pacienteData)
         });
 
-        if (response.status === 201) {
-            console.log("Paciente guardado:", response.data);
-            return response.data; // Suponiendo que el servidor devuelve el paciente creado
-        } else {
-            throw new Error(`Error al guardar el paciente: ${response.statusText}`);
+        // Leer la respuesta como texto
+        const responseBody = await response.text();
+        console.log("Respuesta cruda de la API:", responseBody);
+
+        // Verificar si la respuesta fue exitosa
+        if (!response.ok) {
+            throw new Error('Error al guardar el examen');
         }
+
+        // Devolver la respuesta cruda
+        console.log("Respuesta de la API:", responseBody);
+        return responseBody; // Puedes modificar esto si decides cambiar la respuesta del servidor
+
     } catch (error) {
-        console.error("Error en guardarPaciente:", error);
-
-        // Imprimir información del error
-        if (error.response) {
-            console.error("Respuesta del servidor:", error.response.data);
-            console.error("Código de estado:", error.response.status);
-        } else {
-            console.error("Error sin respuesta del servidor:", error.message);
-        }
-
-        showErrorMessage(error);
-        throw error;
+        console.error("Error en guardarExamen:", error);
+        throw error; // Propagar el error para manejo posterior
     }
 };
+
