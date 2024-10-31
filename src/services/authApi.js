@@ -60,6 +60,43 @@ const authApi = {
         }
     },
 
+    logOut: async () => {
+
+        const token = await AsyncStorage.getItem('token');
+        if (!token) {
+            throw new Error('No token found. Please log in again.');
+        }
+
+        await AsyncStorage.removeItem('token');
+        await AsyncStorage.removeItem('tokenDecoded');
+
+        try {
+            const response = await fetch("http://192.168.1.3:8000/mobile/auth/logout", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+
+            // Leer la respuesta como texto
+            const responseBody = await response.text();
+            console.log("Respuesta cruda de la API:", responseBody);
+
+
+            // Verificar si la respuesta fue exitosa
+            if (!response.ok) {
+                throw new Error('Error al guardar el examen');
+            }
+
+            // Devolver la respuesta cruda
+            return responseBody; // Puedes modificar esto si decides cambiar la respuesta del servidor
+        } catch (error) {
+            console.error("Error en guardarExamen:", error);
+            throw error; // Propagar el error para manejo posterior
+        }
+    }
+
 };
 
 export default authApi;
