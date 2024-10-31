@@ -1,19 +1,31 @@
-import React from 'react';
-import {View, StyleSheet, SafeAreaView} from 'react-native';
-import MainHeader from '../../components/home/MainHeader';
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, SafeAreaView, Text } from 'react-native';
+import MainHeader from '../../components/shared/MainHeader';
 import ImageSelector from '../../components/home/ImageSelector';
-import {useBackExit} from "../../hooks/useBackExit";
-import {pickImage} from "../../utils/picker/imagePicker";
-import {pickDocument} from "../../utils/picker/documentPicker";
-import {takePhoto} from "../../utils/picker/cameraPicker";
+import { useBackExit } from "../../hooks/useBackExit";
+import { pickImage } from "../../utils/picker/imagePicker";
+import { pickDocument } from "../../utils/picker/documentPicker";
+import { takePhoto } from "../../utils/picker/cameraPicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
+    const [nameDecode, setNameDecode] = useState("");
 
     useBackExit();
 
+    useEffect(() => {
+        const getToken = async () => {
+            const tokenDecoded = await AsyncStorage.getItem('tokenDecoded');
+            if (tokenDecoded) {
+                setNameDecode(tokenDecoded);
+            }
+        };
+        getToken();
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
-            <MainHeader />
+            <MainHeader title="¡Hola De Nuevo!" subtitle={nameDecode} />
             <View style={styles.containerSecond}>
                 <ImageSelector
                     onPress={() => pickImage(navigation)}
@@ -44,7 +56,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 20,
-
     },
 });
 

@@ -8,6 +8,7 @@ const PatientList = ({ patients, onPatientPress, onEndReached, loadingMore, load
     const renderItem = ({ item }) => (
         <PatientItem
             name={item.name}
+            cedula={item.cedula}
             onPress={() => onPatientPress(item.PacinetId, item.name, item.cedula)}
         />
     );

@@ -7,8 +7,8 @@ const LogoHeader = () => {
             <View style={styles.logoContainer}>
                 <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
                 <View style={styles.logoTextContainer}>
-                    <Text style={styles.title}>GlaucomApp</Text>
-                    <Text style={styles.subtitle}>Hola de nuevo</Text>
+                    <Text style={styles.title}>GlauApp</Text>
+                    <Text style={styles.subtitle}>Pontificia Universidad Javeriana</Text>
                 </View>
             </View>
         </View>
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         height: 60,
     },
     title: {
-        fontSize: 32,
+        fontSize: 45,
         fontWeight: 'bold',
         color: '#FFFFFF',
         marginTop: 10,
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: 10.5,
         color: '#FFFFFF',
     },
 });

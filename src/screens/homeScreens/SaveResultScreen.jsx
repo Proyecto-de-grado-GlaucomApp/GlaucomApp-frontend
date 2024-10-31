@@ -34,7 +34,7 @@ const SaveResultScreen = ({navigation, route}) => {
     const [showNombreField, setShowNombreField] = useState(false);
     const [errors, setErrors] = useState({});
 
-    const {imageId, distanceRatio, perimeterRatio, areaRatio} = route.params;
+    const {imageId, distanceRatio, perimeterRatio, areaRatio, neuroretinalRimPerimeter, neuroretinalRimArea, excavationPerimeter, excavationArea, state, ddlStage} = route.params;
 
     // Validar campos usando Yup
     const validateField = async (field, value) => {
@@ -112,7 +112,13 @@ const SaveResultScreen = ({navigation, route}) => {
                 urlImage: imageId,
                 distanceRatio,
                 perimeterRatio,
-                areaRatio
+                areaRatio,
+                neuroretinalRimPerimeter,
+                neuroretinalRimArea,
+                excavationPerimeter,
+                excavationArea,
+                state,
+                ddlStage
             });
             Alert.alert("Examen guardado", "El examen ha sido guardado exitosamente.");
             navigation.navigate("Home");

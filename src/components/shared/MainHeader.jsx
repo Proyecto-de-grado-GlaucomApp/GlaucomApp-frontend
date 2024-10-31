@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
-const MainHeader = () => (
-    <View style={styles.header}>
-        <Text style={styles.welcomeText}>HOLA DE NUEVO</Text>
-        <Text style={styles.nameText}>LEONARDO</Text>
-    </View>
+const MainHeader = ({ title, subtitle }) => (
+    <SafeAreaView style={styles.header}>
+        <Text style={styles.nameText}>{subtitle}</Text>
+        <Text style={styles.welcomeText}>{title}</Text>
+    </SafeAreaView>
 );
 
 const styles = StyleSheet.create({
@@ -14,6 +14,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#769BCE',
         paddingVertical: 50,
         paddingHorizontal: 20,
+        borderTopWidth: 20,
+        borderColor: '#769BCE',
+
     },
     welcomeText: {
         fontSize: 16,

@@ -1,13 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { getPatients } from '../../services/patientsApi';
-import { useBackHome } from '../../hooks/useBackHome';
+import React, {useState, useEffect, useCallback} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import {getPatients} from '../../services/patientsApi';
+import {useBackHome} from '../../hooks/useBackHome';
 import LoadingIndicator from "../../components/shared/LoadingIndicator";
 import PatientList from "../../components/patient/PatientList";
-import { mapApiPatients } from "../../utils/mappers/patientMapperApi";
+import {mapApiPatients} from "../../utils/mappers/patientMapperApi";
+import MainHeader from "../../components/shared/MainHeader";
 
-const PatientScreen = ({ navigation }) => {
+const PatientScreen = ({navigation}) => {
     const [patients, setPatients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
@@ -57,7 +58,11 @@ const PatientScreen = ({ navigation }) => {
             console.log('Patient ID:', patientId);
             console.log('Patient Name:', patientName);
             console.log('Patient Cedula:', patientCedula);
-            navigation.navigate('PatientDetail', { patientId: patientId, patientName: patientName, patientCedula: patientCedula });
+            navigation.navigate('PatientDetail', {
+                patientId: patientId,
+                patientName: patientName,
+                patientCedula: patientCedula
+            });
 
         } catch (error) {
             console.error('Error navigating to patient details:', error);
@@ -72,27 +77,34 @@ const PatientScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
-            {loading ? (
-                <LoadingIndicator message="Cargando pacientes..." />
-            ) : (
-                <PatientList
-                    patients={patients}
-                    onPatientPress={handlePress}
-                    onEndReached={handleLoadMore}
-                    loadingMore={loadingMore}
-                    loadingMoreMessage="Cargando más pacientes..."
-                />
-            )}
+        <View style={styles.containerHeader}>
+            <MainHeader title="Lista de datos" subtitle="Pacientes"/>
+            <View style={styles.containerInfo}>
+
+                {loading ? (
+                    <LoadingIndicator message="Cargando pacientes..."/>
+                ) : (
+                    <PatientList
+                        patients={patients}
+                        onPatientPress={handlePress}
+                        onEndReached={handleLoadMore}
+                        loadingMore={loadingMore}
+                        loadingMoreMessage="Cargando más pacientes..."
+                    />
+                )}
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    containerHeader: {
+        flex: 1,
+    },
+    containerInfo: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#fff',
+        backgroundColor: '#ffffff',
     },
 });
 

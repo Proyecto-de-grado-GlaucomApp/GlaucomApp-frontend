@@ -36,6 +36,12 @@ export const mapApiProcessImage = (responseDataImage) => {
             distanceRatio: 0,
             perimeterRatio: 0,
             areaRatio: 0,
+            neuroretinalRimPerimeter: 0,
+            neuroretinalRimArea: 0,
+            excavationPerimeter: 0,
+            excavationArea: 0,
+            state: '',
+            ddlStage: 0,
         };
     }
 
@@ -45,5 +51,11 @@ export const mapApiProcessImage = (responseDataImage) => {
         distanceRatio: responseDataImage.distanceRatio || 0,
         perimeterRatio: responseDataImage.perimeterRatio || 0,
         areaRatio: responseDataImage.areaRatio || 0,
+        neuroretinalRimPerimeter: responseDataImage.neuroretinalRimPerimeter || 0,
+        neuroretinalRimArea: responseDataImage.neuroretinalRimArea || 0,
+        excavationPerimeter: responseDataImage.excavationPerimeter || 0,
+        excavationArea: responseDataImage.excavationArea || 0,
+        state: responseDataImage.state || '',
+        ddlStage: responseDataImage.ddlStage || 0,
     };
 };
