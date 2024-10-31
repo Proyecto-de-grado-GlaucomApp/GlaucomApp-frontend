@@ -86,7 +86,7 @@ export async function deleteExam(examId, pacientId) {
 import {format} from 'date-fns';
 import {Alert} from "react-native";
 
-export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio}) => {
+export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio, neuroretinalRimPerimeter, neuroretinalRimArea,excavationPerimeter,excavationArea,state,ddlStage}) => {
     const date = format(new Date(), "yyyy-MM-dd");
 
     const examenData = {
@@ -96,7 +96,13 @@ export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeter
         urlImage,
         distanceRatio,
         perimeterRatio,
-        areaRatio
+        areaRatio,
+        neuroretinalRimPerimeter,
+        neuroretinalRimArea,
+        excavationPerimeter,
+        excavationArea,
+        state,
+        ddlStage
     };
 
     const token = await AsyncStorage.getItem('token');

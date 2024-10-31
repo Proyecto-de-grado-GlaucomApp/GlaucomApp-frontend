@@ -86,13 +86,13 @@ const authApi = {
 
             // Verificar si la respuesta fue exitosa
             if (!response.ok) {
-                throw new Error('Error al guardar el examen');
+                throw new Error('Error al Cerrar Sesion');
             }
 
             // Devolver la respuesta cruda
             return responseBody; // Puedes modificar esto si decides cambiar la respuesta del servidor
         } catch (error) {
-            console.error("Error en guardarExamen:", error);
+            console.error("Error al Cerrar Sesion:", error);
             throw error; // Propagar el error para manejo posterior
         }
     }
