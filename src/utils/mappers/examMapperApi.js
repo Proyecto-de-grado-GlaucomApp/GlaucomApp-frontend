@@ -25,7 +25,13 @@ export const mapApiExamById = (responseDataExams) => {
             urlImage: '',
             distanceRatio: 0,
             perimeterRatio: 0,
-            areaRatio: 0
+            areaRatio: 0,
+            neuroretinalRimPerimeter: 0,
+            neuroretinalRimArea: 0,
+            excavationPerimeter: 0,
+            excavationArea: 0,
+            state: '',
+            ddlStage: 0
         };
     }
 
@@ -36,7 +42,13 @@ export const mapApiExamById = (responseDataExams) => {
         urlImage: responseDataExams.urlImage || '',
         distanceRatio: responseDataExams.distanceRatio || 0,
         perimeterRatio: responseDataExams.perimeterRatio || 0,
-        areaRatio: responseDataExams.areaRatio || 0
+        areaRatio: responseDataExams.areaRatio || 0,
+        neuroretinalRimPerimeter: responseDataExams.neuroretinalRimPerimeter || 0,
+        neuroretinalRimArea: responseDataExams.neuroretinalRimArea || 0,
+        excavationPerimeter: responseDataExams.excavationPerimeter || 0,
+        excavationArea: responseDataExams.excavationArea || 0,
+        state: responseDataExams.state || '',
+        ddlStage: responseDataExams.ddlStage || 0
     };
 };
 
