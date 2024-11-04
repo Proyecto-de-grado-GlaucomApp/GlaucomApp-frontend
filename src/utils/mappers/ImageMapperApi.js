@@ -40,7 +40,7 @@ export const mapApiProcessImage = (responseDataImage) => {
             neuroretinalRimArea: 0,
             excavationPerimeter: 0,
             excavationArea: 0,
-            state: '',
+            state: 0,
             ddlStage: 0,
         };
     }
@@ -55,7 +55,7 @@ export const mapApiProcessImage = (responseDataImage) => {
         neuroretinalRimArea: responseDataImage.neuroretinalRimArea || 0,
         excavationPerimeter: responseDataImage.excavationPerimeter || 0,
         excavationArea: responseDataImage.excavationArea || 0,
-        state: responseDataImage.state || '',
+        state: responseDataImage.state || 0,
         ddlStage: responseDataImage.ddlStage || 0,
     };
 };

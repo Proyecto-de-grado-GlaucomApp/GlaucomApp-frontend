@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, TouchableOpacity, ScrollView} from 'react-native';
-import {useRoute, useNavigation} from '@react-navigation/native';
-import {mapApiProcessImage} from "../../utils/mappers/ImageMapperApi";
+import { View, StyleSheet, Image, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Table, Row, Rows} from 'react-native-table-component';
+import { Table, Row, Rows } from 'react-native-table-component';
+import { mapApiProcessImage } from "../../utils/mappers/ImageMapperApi";
 
 const ResultScreen = () => {
     const route = useRoute();
@@ -12,8 +12,16 @@ const ResultScreen = () => {
 
     const viewData = mapApiProcessImage(responseData);
 
-    const glaucomaProbability = "0.3%";
+    viewData.state = 2; // Simulando el estado para pruebas
+
+    console.log('Estado recibido en ResultScreen:', responseData);
+
+    const glaucomaProbability = (1 - (viewData.ddlStage/10)) * 100;
     const narrowestRimWidth = "0.2";
+
+    const handleImagePress = () => {
+        navigation.navigate('ViewImage', { imageUri: viewData.imageUrl });
+    };
 
     const handleSave = () => {
         navigation.navigate('SaveResult', {
@@ -34,66 +42,93 @@ const ResultScreen = () => {
         navigation.navigate('Home');
     };
 
-    // Datos de la tabla
+    const getStateTextAndColor = (state) => {
+        switch (state) {
+            case 1:
+                return { text: 'En riesgo', color: '#FF0000' }; // Rojo
+            case 2:
+                return { text: 'Daño por glaucoma', color: '#dfdf19' }; // Amarillo
+            case 3:
+                return { text: 'Discapacidad por glaucoma', color: '#00FF00' }; // Verde
+            default:
+                return { text: 'Estado desconocido', color: '#769BCE' }; // Negro por defecto
+        }
+    };
+
+    const getDdlStageColor = (ddlStage) => {
+        switch (ddlStage) {
+            case 1:
+                return '#FF0000'; // Rojo
+            case 2:
+                return '#b6b60a'; // Amarillo
+            case 3:
+                return '#00FF00'; // Verde
+            default:
+                return '#769BCE'; // Negro por defecto
+        }
+    };
+
+    const stateInfo = getStateTextAndColor(viewData.state);
+    const ddlStageColor = getDdlStageColor(viewData.ddlStage);
+
     const tableHead = ['', 'Perímetro', 'Área'];
     const tableData = [
-        [<Text style={styles.boldText}>Excavación</Text>, viewData.excavationPerimeter, viewData.excavationArea],
-        [<Text style={styles.boldText}>Nervio</Text>, viewData.neuroretinalRimPerimeter, viewData.neuroretinalRimArea]
+        [<Text style={styles.boldText}>Excavación</Text>, `${viewData.excavationPerimeter} mm`, `${viewData.excavationArea} mm²`],
+        [<Text style={styles.boldText}>Nervio</Text>, `${viewData.neuroretinalRimPerimeter} mm`, `${viewData.neuroretinalRimArea} mm²`]
     ];
 
     const metricRatiosHead = ['Distancia', 'Perímetro', 'Área'];
     const metricRatiosData = [
-        [viewData.distanceRatio, viewData.perimeterRatio, viewData.areaRatio]
+        [`${viewData.distanceRatio} %`, `${viewData.perimeterRatio} %`, `${viewData.areaRatio} %`]
     ];
 
     return (
         <View style={styles.container}>
+            <View style={styles.containerImage}>
+                <TouchableOpacity onPress={handleImagePress} style={styles.imageWrapper}>
+                    <Image source={{ uri: viewData?.imageUrl }} style={styles.image} />
+                </TouchableOpacity>
+            </View>
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-                <View style={styles.containerImage}>
-                    <Image source={{uri: viewData?.imageUrl}} style={styles.image}/>
-                </View>
-
                 <View style={styles.containerInfo}>
                     <View style={styles.iconHint}>
-                        <Icon name="lightbulb" size={30} color="#6ABB6E"/>
+                        <Icon name="lightbulb" size={30} color={stateInfo.color} />
                     </View>
 
                     <View style={styles.infoContainer}>
-                        <Text style={styles.stageText}>Etapa DDLS <Text
-                            style={styles.stageNumber}>{viewData.ddlStage}</Text></Text>
-                        <Text style={styles.probabilityText}>Probabilidad de glaucoma: <Text
-                            style={styles.probabilityValue}>{glaucomaProbability}</Text></Text>
+                        <Text style={styles.stageText}>Etapa DDLS <Text style={[styles.stageNumber, { color: ddlStageColor }]}>{viewData.ddlStage}</Text></Text>
+                        <Text style={styles.probabilityText}>Severidad: <Text style={[styles.probabilityValue, { color: ddlStageColor }]}>{glaucomaProbability}%</Text></Text>
                     </View>
 
                     <Text style={styles.descriptionText}>
                         El narrowest rim width es {narrowestRimWidth}, como consecuencia, según la relación de
-                        distancias el paciente posee {viewData.state} riesgo.
+                        distancias el paciente posee {stateInfo.text} riesgo.
                     </Text>
 
-                    {/* Tabla de métricas calculadas */}
                     <View style={styles.tableContainer}>
-                        <Text style={styles.tableTitle}>Métricas Calculadas (mm)</Text>
+                        <Text style={styles.tableTitle}>Métricas Calculadas</Text>
                         <Table>
                             <Row data={tableHead} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
                             <Rows data={tableData} textStyle={styles.tableDataText} />
                         </Table>
                     </View>
 
-                    {/* Tabla de relación de métricas */}
                     <View style={styles.tableContainer}>
-                        <Text style={styles.tableTitle}>Relación de Métricas (%)</Text>
+                        <Text style={styles.tableTitle}>Relación de Métricas</Text>
                         <Table>
-                            <Row data={metricRatiosHead} style={styles.tableHeader} textStyle={styles.tableHeaderText}/>
-                            <Rows data={metricRatiosData} textStyle={styles.tableDataText}/>
+                            <Row data={metricRatiosHead} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
+                            <Rows data={metricRatiosData} textStyle={styles.tableDataText} />
                         </Table>
                     </View>
 
                     <View style={styles.iconContainer}>
                         <TouchableOpacity onPress={handleSave} style={styles.iconButton}>
-                            <Icon name="save" size={30} color="#769BCE"/>
+                            <Icon name="save" size={30} color="#769BCE" />
+                            <Text style={styles.iconLabel}>Guardar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={handleDiscard} style={styles.iconButton}>
-                            <Icon name="cancel" size={30} color="#769BCE"/>
+                            <Icon name="cancel" size={30} color="#769BCE" />
+                            <Text style={styles.iconLabel}>Descartar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -122,8 +157,11 @@ const styles = StyleSheet.create({
     image: {
         width: '100%',
         height: 250,
-        resizeMode: 'contain',
-        borderRadius: 10,
+        resizeMode: 'contain'
+    },
+    imageWrapper: {
+        width: '100%',
+        alignItems: 'center'
     },
     iconHint: {
         marginTop: 10,
@@ -138,25 +176,25 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     stageNumber: {
-        color: '#4C7A0B',
+        fontWeight: 'bold',
     },
     probabilityText: {
         fontSize: 16,
         marginTop: 5,
     },
     probabilityValue: {
-        color: '#4C7A0B',
+        fontWeight: 'bold',
     },
     descriptionText: {
         fontSize: 14,
-        marginTop: 10,
+        marginTop: 15, // Aumentado
         paddingLeft: 15,
         textAlign: 'justify',
         borderLeftColor: '#4E4E4E',
         borderLeftWidth: 2,
     },
     tableContainer: {
-        marginTop: 20,
+        marginTop: 30, // Aumentado
         width: '100%',
     },
     tableTitle: {
@@ -191,12 +229,17 @@ const styles = StyleSheet.create({
     },
     iconButton: {
         padding: 10,
+        alignItems: 'center', // Centrar iconos y etiquetas
+    },
+    iconLabel: {
+        marginTop: 5,
+        fontSize: 12,
+        color: '#769BCE',
+        fontWeight: 'bold',
     },
     boldText: {
         fontWeight: 'bold',
-        color: '#333',
-        textAlign: 'center',
-    },
+    }
 });
 
 export default ResultScreen;

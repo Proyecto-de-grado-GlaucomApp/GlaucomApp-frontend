@@ -4,7 +4,7 @@ import showErrorMessage from "../utils/messages/errorMessages";
 
 export async function getExams(startIndex = 0, endIndex = 15, pacientId) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/exams?startIndex=${startIndex}&endIndex=${endIndex}&pacientId=${pacientId}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/get/exams?startIndex=${startIndex}&endIndex=${endIndex}&pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -31,7 +31,7 @@ export async function getExams(startIndex = 0, endIndex = 15, pacientId) {
 
 export async function getExamById(examId, pacientId) {
     try {
-        const apiUrl = process.env.EXPO + `/mobile/clinical_history/get/exam?examId=${examId}&pacientId=${pacientId}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/get/exam?examId=${examId}&pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -57,7 +57,7 @@ export async function getExamById(examId, pacientId) {
 
 export async function deleteExam(examId, pacientId) {
     try {
-        const apiUrl = process.env.EXPO + `/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -111,7 +111,7 @@ export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeter
     }
 
     try {
-        const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/exam", {
+        const response = await fetch("http://172.16.1.153:8000/mobile/clinical_history/save/exam", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

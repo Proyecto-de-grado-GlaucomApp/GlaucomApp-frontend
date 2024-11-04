@@ -4,7 +4,7 @@ import showErrorMessage from "../utils/messages/errorMessages";
 
 export async function postUploadImage(imageUri) {
     try {
-        const apiUrl = 'http://192.168.1.3:8000/mobile/glaucoma-screening/process';
+        const apiUrl = "http://172.16.1.153:8000/mobile/glaucoma-screening/process";
 
         console.log('apiUrl:  ', apiUrl);
 

@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import showErrorMessage from "../utils/messages/errorMessages";
 import {jwtDecode} from "jwt-decode";
 
-const apiUrlLogin = "http://192.168.1.3:8000/mobile/auth/login";
-const apiUrlRegister = "http://192.168.1.3:8000/mobile/auth/register";
+const apiUrlLogin = "http://172.16.1.153:8000/mobile/auth/login";
+const apiUrlRegister = "http://172.16.1.153:8000/mobile/auth/register";
 
 const authApi = {
     login: async (username, password) => {
@@ -71,7 +71,7 @@ const authApi = {
         await AsyncStorage.removeItem('tokenDecoded');
 
         try {
-            const response = await fetch("http://192.168.1.3:8000/mobile/auth/logout", {
+            const response = await fetch("http://172.16.1.153:8000/mobile/auth/logout", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

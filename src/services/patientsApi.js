@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export async function getPatients(startIndex = 0, endIndex = 15) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/pacients?startIndex=${startIndex}&endIndex=${endIndex}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/get/pacients?startIndex=${startIndex}&endIndex=${endIndex}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -31,7 +31,7 @@ export async function getPatients(startIndex = 0, endIndex = 15) {
 
 export async function getPatientByCedula(cedula) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/pacient?cedula=${cedula}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/get/pacient?cedula=${cedula}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -63,7 +63,7 @@ export async function getPatientByCedula(cedula) {
 
 export async function deletePatient(patientId) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/delete/pacient/${patientId}`;
+        const apiUrl = `http://172.16.1.153:8000/mobile/clinical_history/delete/pacient/${patientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -101,7 +101,7 @@ export const savePatient = async ({ name, cedula }) => {
             throw new Error('No token found. Please log in again.');
         }
 
-        const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/pacient", {
+        const response = await fetch("http://172.16.1.153:8000/mobile/clinical_history/save/pacient", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
