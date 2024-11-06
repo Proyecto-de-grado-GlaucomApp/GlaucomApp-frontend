@@ -64,12 +64,13 @@ const ResultScreen = () => {
             case 3:
                 return '#00FF00'; // Verde
             default:
-                return '#769BCE'; // Negro por defecto
+                return '#769BCE';
         }
     };
 
     const stateInfo = getStateTextAndColor(viewData.state);
     const ddlStageColor = getDdlStageColor(viewData.ddlStage);
+
 
     const tableHead = ['', 'Perímetro', 'Área'];
     const tableData = [
@@ -92,17 +93,19 @@ const ResultScreen = () => {
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.containerInfo}>
                     <View style={styles.iconHint}>
-                        <Icon name="lightbulb" size={30} color={stateInfo.color} />
+                        <Icon name="lightbulb" size={35} color={stateInfo.color} />
                     </View>
 
                     <View style={styles.infoContainer}>
                         <Text style={styles.stageText}>Etapa DDLS <Text style={[styles.stageNumber, { color: ddlStageColor }]}>{viewData.ddlStage}</Text></Text>
-                        <Text style={styles.probabilityText}>Severidad: <Text style={[styles.probabilityValue, { color: ddlStageColor }]}>{glaucomaProbability}%</Text></Text>
+                        <Text style={[styles.probabilityText, { fontStyle: 'italic' }]}>
+                            Severidad: <Text style={[styles.probabilityValue, { color: ddlStageColor }]}>{glaucomaProbability}%</Text>
+                        </Text>
                     </View>
 
                     <Text style={styles.descriptionText}>
-                        El narrowest rim width es {narrowestRimWidth}, como consecuencia, según la relación de
-                        distancias el paciente posee {stateInfo.text} riesgo.
+                        El Borde mas estrecho es {narrowestRimWidth}, como consecuencia, según la relación de
+                        distancias el paciente posee {stateInfo.text}.
                     </Text>
 
                     <View style={styles.tableContainer}>
@@ -164,6 +167,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     iconHint: {
+
         marginTop: 10,
         alignSelf: 'center',
     },
@@ -172,17 +176,19 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     stageText: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold',
     },
     stageNumber: {
+        fontSize: 22,
         fontWeight: 'bold',
     },
     probabilityText: {
-        fontSize: 16,
+        fontSize: 20,
         marginTop: 5,
     },
     probabilityValue: {
+        fontSize: 20,
         fontWeight: 'bold',
     },
     descriptionText: {
@@ -229,7 +235,7 @@ const styles = StyleSheet.create({
     },
     iconButton: {
         padding: 10,
-        alignItems: 'center', // Centrar iconos y etiquetas
+        alignItems: 'center',
     },
     iconLabel: {
         marginTop: 5,

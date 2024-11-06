@@ -13,7 +13,7 @@ export async function deleteAccount() {
     await AsyncStorage.removeItem('tokenDecoded');
 
     try {
-        const response = await fetch("http://172.16.1.153:8000/mobile/auth/closeaccount", {
+        const response = await fetch("http:///192.168.1.3:8000/mobile/auth/closeaccount", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
