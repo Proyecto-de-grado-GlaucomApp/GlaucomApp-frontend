@@ -187,8 +187,9 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
         marginTop: 20,
+
     },
     input: {
         borderWidth: 1,
@@ -196,11 +197,15 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginTop: 10,
+        fontFamily: 'SansationRegular',
+
     },
     errorText: {
         color: '#769BCE',
         fontSize: 14,
         marginTop: 5,
+        fontFamily: 'SansationRegular',
+
     },
 });
 

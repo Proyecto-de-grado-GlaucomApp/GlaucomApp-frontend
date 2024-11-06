@@ -141,10 +141,13 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
+
     },
     subtitle: {
         fontSize: 18,
+        fontFamily: 'SansationRegular',
+
     },
     deleteIcon: {
         padding: 8,
@@ -168,13 +171,19 @@ const styles = StyleSheet.create({
     },
     imageName: {
         fontSize: 14,
-        fontWeight: 'bold',
         flex: 1,
+        fontFamily: 'SansationBold',
+        textAlignVertical: 'center',
+
     },
     imageDate: {
-        fontSize: 12,
+        fontSize: 10,
         color: '#666',
         textAlign: 'right',
+        fontFamily: 'SansationRegular',
+        textAlignVertical: 'center',
+
+
     },
     listContainer: {
         paddingBottom: 16,

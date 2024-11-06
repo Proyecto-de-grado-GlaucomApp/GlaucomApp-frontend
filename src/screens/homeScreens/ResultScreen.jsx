@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     iconHint: {
-
         marginTop: 10,
         alignSelf: 'center',
     },
@@ -177,35 +176,40 @@ const styles = StyleSheet.create({
     },
     stageText: {
         fontSize: 22,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
+
     },
     stageNumber: {
         fontSize: 22,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
+
     },
     probabilityText: {
         fontSize: 20,
         marginTop: 5,
+        fontFamily: 'SansationRegular',
     },
     probabilityValue: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
+
     },
     descriptionText: {
         fontSize: 14,
-        marginTop: 15, // Aumentado
+        marginTop: 15,
         paddingLeft: 15,
         textAlign: 'justify',
         borderLeftColor: '#4E4E4E',
         borderLeftWidth: 2,
+        fontFamily: 'SansationRegular',
     },
     tableContainer: {
-        marginTop: 30, // Aumentado
+        marginTop: 30,
         width: '100%',
     },
     tableTitle: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
         textAlign: 'center',
         marginVertical: 5,
         borderBottomWidth: 2,
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
     },
     tableHeaderText: {
         fontSize: 14,
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
         color: '#333',
         textAlign: 'center',
     },
@@ -225,6 +229,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#666',
         textAlign: 'center',
+        fontFamily: 'SansationRegular',
     },
     iconContainer: {
         flexDirection: 'row',
@@ -241,10 +246,11 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 12,
         color: '#769BCE',
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
+
     },
     boldText: {
-        fontWeight: 'bold',
+        fontFamily: 'SansationBold',
     }
 });
 

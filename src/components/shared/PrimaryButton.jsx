@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         color: '#4E4E4E',
         fontSize: 15,
         fontWeight: 'normal',
+        fontFamily: 'SansationRegular',
     },
 });
 

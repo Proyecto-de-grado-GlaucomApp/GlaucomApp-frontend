@@ -21,11 +21,15 @@ const styles = StyleSheet.create({
     welcomeText: {
         fontSize: 16,
         color: '#ffffff',
+        fontFamily: 'SansationRegular',
+
     },
     nameText: {
         fontSize: 35,
         color: '#FFDD00',
         fontWeight: 'semibold',
+        fontFamily: 'SansationRegular',
+
     },
 });
 

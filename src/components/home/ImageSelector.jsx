@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     descriptionText: {
         color: '#FFFFFF',
         fontSize: 15,
+        fontFamily: 'SansationRegular',
     },
 });
 

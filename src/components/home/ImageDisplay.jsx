@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     imagePlaceholder: {
         width: '100%',
         height: '100%',
-        backgroundColor: '#f0f0f0', // Color de fondo para la vista de marcador
+        backgroundColor: '#f0f0f0',
     },
 });
 

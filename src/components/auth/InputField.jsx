@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 10,
         color: '#4E4E4E',
+        fontFamily: 'SansationRegular',
     },
     viewIcon: {
         borderRadius: 50,
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
     errorText: {
         color: 'rgb(255,255,255)',
         marginLeft: 10,
+        fontFamily: 'SansationRegular',
     },
 });
 

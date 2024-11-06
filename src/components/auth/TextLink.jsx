@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 16,
         textAlign: 'center',
+        fontFamily: 'SansationRegular',
+
     },
 });
 

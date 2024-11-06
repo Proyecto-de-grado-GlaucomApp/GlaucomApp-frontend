@@ -6,8 +6,11 @@ import { useFonts } from "expo-font";
 export default function App() {
     const [fontsLoaded] = useFonts({
         SansationRegular: require('./assets/fonts/sansation/Sansation_Regular.ttf'),
-        Bold: require('./assets/fonts/sansation/Sansation_Bold.ttf'),
-        Light: require('./assets/fonts/sansation/Sansation_Light.ttf'),
+        SansationBold: require('./assets/fonts/sansation/Sansation_Bold.ttf'),
+        SansationLight: require('./assets/fonts/sansation/Sansation_Light.ttf'),
+        SansationItalic: require('./assets/fonts/sansation/Sansation_Italic.ttf'),
+        SansationBoldItalic: require('./assets/fonts/sansation/Sansation_Bold_Italic.ttf'),
+        SansationLightItalic: require('./assets/fonts/sansation/Sansation_Light_Italic.ttf'),
     });
 
     if (!fontsLoaded) {

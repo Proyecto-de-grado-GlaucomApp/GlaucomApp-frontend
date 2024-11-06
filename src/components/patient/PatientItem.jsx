@@ -25,10 +25,12 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 18,
+        fontFamily: 'SansationRegular',
     },
     cedula: {
         fontSize: 14,
         color: '#a9a9a9',
+        fontFamily: 'SansationRegular',
     },
 });
 

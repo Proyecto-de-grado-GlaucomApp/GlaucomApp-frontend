@@ -18,9 +18,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 5,
+        fontFamily: 'SansationRegular',
+
     },
     dataText: {
         fontSize: 16,
+        fontFamily: 'SansationRegular',
     },
 });
 
