@@ -18,8 +18,46 @@ const PatientExamScreen = () => {
     const [examData, setExamData] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const glaucomaProbability = "0.3%";
+    // Asegurarse de que los datos estén disponibles antes de usarlos
+    const glaucomaProbability = examData ? (1 - (examData.ddlStage / 10)) * 100 : 0;
     const narrowestRimWidth = "0.2";
+
+    if (examData) {
+        examData.state = 2;
+    }
+
+    const handleImagePress = () => {
+        navigation.navigate('ViewImage', { imageUri: examData.urlImage });
+    };
+
+    const getStateTextAndColor = (state) => {
+        switch (state) {
+            case 1:
+                return { text: 'En riesgo', color: '#FF0000' }; // Rojo
+            case 2:
+                return { text: 'Daño por glaucoma', color: '#dfdf19' }; // Amarillo
+            case 3:
+                return { text: 'Discapacidad por glaucoma', color: '#00FF00' }; // Verde
+            default:
+                return { text: 'Estado desconocido', color: '#769BCE' }; // Negro por defecto
+        }
+    };
+
+    const getDdlStageColor = (ddlStage) => {
+        switch (ddlStage) {
+            case 1:
+                return '#FF0000'; // Rojo
+            case 2:
+                return '#b6b60a'; // Amarillo
+            case 3:
+                return '#00FF00'; // Verde
+            default:
+                return '#769BCE';
+        }
+    };
+
+    const stateInfo = examData ? getStateTextAndColor(examData.state) : {};
+    const ddlStageColor = examData ? getDdlStageColor(examData.ddlStage) : '#769BCE';
 
     const confirmDeleteExam = () => {
         Alert.alert(
@@ -49,7 +87,12 @@ const PatientExamScreen = () => {
             try {
                 const response = await getExamById(examId, patientId);
                 const mappedData = mapApiExamById(response);
+
+                console.log("mapeado URL verificacion:",mappedData?.urlImage); // Verificar la URL de la imagen
+
                 setExamData(mappedData);
+
+                console.log("Imagen URL verificacion:", examData?.urlImage);
             } catch (error) {
                 console.error("Error fetching exam data:", error);
             } finally {
@@ -60,6 +103,7 @@ const PatientExamScreen = () => {
         fetchExamData();
     }, [examId, patientId]);
 
+
     if (loading) {
         return <ActivityIndicator size="large" color="#0000ff" />;
     }
@@ -67,63 +111,68 @@ const PatientExamScreen = () => {
     // Datos de la tabla
     const tableHead = ['', 'Perímetro', 'Área'];
     const tableData = [
-        [<Text style={styles.boldText}>Excavación</Text>, examData.excavationPerimeter, examData.excavationArea],
-        [<Text style={styles.boldText}>Nervio</Text>, examData.neuroretinalRimPerimeter, examData.neuroretinalRimArea]
+        [<Text style={styles.boldText}>Excavación</Text>, `${examData.excavationPerimeter} mm`, `${examData.excavationArea} mm`],
+        [<Text style={styles.boldText}>Nervio</Text>, `${examData.neuroretinalRimPerimeter} mm`, `${examData.neuroretinalRimArea} mm`]
     ];
 
     const metricRatiosHead = ['Distancia', 'Perímetro', 'Área'];
     const metricRatiosData = [
-        [examData.distanceRatio, examData.perimeterRatio, examData.areaRatio]
+        [`${examData.distanceRatio} %`, `${examData.perimeterRatio} %`, `${examData.areaRatio} %`]
     ];
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scrollContainer}>
-                <TouchableOpacity style={styles.deleteIcon} onPress={confirmDeleteExam}>
-                    <Icon name="delete-outline" size={28} color="#769BCE" />
-                </TouchableOpacity>
-
-                <View style={styles.containerImage}>
+            <View style={styles.containerImage}>
+                <TouchableOpacity onPress={handleImagePress} style={styles.imageWrapper}>
                     <Image source={{ uri: examData?.urlImage }} style={styles.image} />
-                </View>
-
+                </TouchableOpacity>
+            </View>
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.containerInfo}>
                     <View style={styles.iconHint}>
-                        <Icon name="lightbulb" size={30} color="#6ABB6E" />
+                        <Icon name="lightbulb" size={35} color={stateInfo.color} />
                     </View>
 
                     <View style={styles.infoContainer}>
-                        <Text style={styles.stageText}>Etapa DDLS <Text style={styles.stageNumber}>{examData.ddlStage}</Text></Text>
-                        <Text style={styles.probabilityText}>Probabilidad de glaucoma: <Text style={styles.probabilityValue}>{glaucomaProbability}</Text></Text>
+                        <Text style={styles.stageText}>Etapa DDLS <Text style={[styles.stageNumber, { color: ddlStageColor }]}>{examData.ddlStage}</Text></Text>
+                        <Text style={[styles.probabilityText, { fontStyle: 'italic' }]} >
+                            Severidad: <Text style={[styles.probabilityValue, { color: ddlStageColor }]}>{glaucomaProbability}%</Text>
+                        </Text>
                     </View>
 
                     <Text style={styles.descriptionText}>
-                        El narrowest rim width es {narrowestRimWidth}, como consecuencia, según la relación de
-                        distancias el paciente posee {examData.state} riesgo.
+                        El Borde mas estrecho es {narrowestRimWidth}, como consecuencia, según la relación de
+                        distancias el paciente posee {stateInfo.text}.
                     </Text>
 
-                    {/* Tabla de métricas calculadas */}
                     <View style={styles.tableContainer}>
-                        <Text style={styles.tableTitle}>Métricas Calculadas (mm)</Text>
+                        <Text style={styles.tableTitle}>Métricas Calculadas</Text>
                         <Table>
                             <Row data={tableHead} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
                             <Rows data={tableData} textStyle={styles.tableDataText} />
                         </Table>
                     </View>
 
-                    {/* Tabla de relación de métricas */}
                     <View style={styles.tableContainer}>
-                        <Text style={styles.tableTitle}>Relación de Métricas (%)</Text>
+                        <Text style={styles.tableTitle}>Relación de Métricas</Text>
                         <Table>
                             <Row data={metricRatiosHead} style={styles.tableHeader} textStyle={styles.tableHeaderText} />
                             <Rows data={metricRatiosData} textStyle={styles.tableDataText} />
                         </Table>
+                    </View>
+
+                    <View style={styles.iconContainer}>
+                        <TouchableOpacity onPress={confirmDeleteExam} style={styles.iconButton}>
+                            <Icon name="delete" size={30} color="#769BCE" />
+                            <Text style={styles.iconLabel}>Eliminar Examen</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     container: {
@@ -152,7 +201,6 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 250,
         resizeMode: 'contain',
-        borderRadius: 10,
     },
     iconHint: {
         marginTop: 10,
@@ -162,30 +210,36 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         marginTop: 15,
     },
+    imageWrapper: {
+        width: '100%',
+        alignItems: 'center'
+    },
     stageText: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold',
     },
     stageNumber: {
-        color: '#4C7A0B',
+        fontSize: 22,
+        fontWeight: 'bold',
     },
     probabilityText: {
-        fontSize: 16,
+        fontSize: 20,
         marginTop: 5,
     },
     probabilityValue: {
-        color: '#4C7A0B',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
     descriptionText: {
         fontSize: 14,
-        marginTop: 10,
+        marginTop: 15, // Aumentado
         paddingLeft: 15,
         textAlign: 'justify',
         borderLeftColor: '#4E4E4E',
         borderLeftWidth: 2,
     },
     tableContainer: {
-        marginTop: 20,
+        marginTop: 30, // Aumentado
         width: '100%',
     },
     tableTitle: {
@@ -211,10 +265,25 @@ const styles = StyleSheet.create({
         color: '#666',
         textAlign: 'center',
     },
+    iconContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '50%',
+        marginTop: 20,
+        alignSelf: 'center',
+    },
+    iconButton: {
+        padding: 10,
+        alignItems: 'center',
+    },
+    iconLabel: {
+        marginTop: 5,
+        fontSize: 12,
+        color: '#769BCE',
+        fontWeight: 'bold',
+    },
     boldText: {
         fontWeight: 'bold',
-        color: '#333',
-        textAlign: 'center',
     },
 });
 

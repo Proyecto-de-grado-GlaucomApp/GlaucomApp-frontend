@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import PrimaryButton from '../../components/shared/PrimaryButton';
 import InputField from '../../components/auth/InputField';
 import LogoHeader from "../../components/auth/LogoHeader";
@@ -17,13 +18,11 @@ const initialValues = {
 
 export default function RegisterScreen({ navigation }) {
     const handleRegister = async (values) => {
-        // Verificación de contraseñas
         if (values.password !== values.confirmPassword) {
             Alert.alert("Error", "Las contraseñas no coinciden");
             return;
         }
 
-        // Crea el objeto para enviar
         const user = {
             name: values.name,
             username: values.username,
@@ -31,7 +30,7 @@ export default function RegisterScreen({ navigation }) {
         };
 
         try {
-            const message = await authApi.AuthRegister(user.name, user.username, user.password); // Llama al servicio
+            const message = await authApi.AuthRegister(user.name, user.username, user.password);
             Alert.alert("Éxito", message);
             navigation.navigate('Login');
         } catch (error) {
@@ -40,49 +39,40 @@ export default function RegisterScreen({ navigation }) {
     };
 
     return (
-        <Formik
-            validationSchema={registerSchema}
-            initialValues={initialValues}
-            onSubmit={handleRegister}
+        <KeyboardAwareScrollView
+            contentContainerStyle={styles.scrollContainer}
+            enableOnAndroid={true}
+            extraScrollHeight={0} // No se añadirá espacio adicional
+            enableAutomaticScroll={false} // Desactiva el desplazamiento automático al abrir el teclado
+            keyboardShouldPersistTaps="handled"
         >
-            {({ handleSubmit }) => {
-                return (
+            <Formik
+                validationSchema={registerSchema}
+                initialValues={initialValues}
+                onSubmit={handleRegister}
+            >
+                {({ handleSubmit }) => (
                     <View style={styles.container}>
                         <LogoHeader />
-
-                        <InputField
-                            name='name'
-                            placeholder='Usuario'
-                            iconName="person"
-                        />
-                        <InputField
-                            name='username'
-                            placeholder='Email'
-                            iconName="mail"
-                        />
-                        <InputField
-                            name='password'
-                            placeholder='Contraseña'
-                            iconName="eye"
-                            secureTextEntry={true}
-                        />
-                        <InputField
-                            name='confirmPassword'
-                            placeholder='Confirmar Contraseña'
-                            iconName="eye"
-                            secureTextEntry={true}
-                        />
+                        <InputField name='name' placeholder='Usuario' iconName="person" />
+                        <InputField name='username' placeholder='Email' iconName="mail" />
+                        <InputField name='password' placeholder='Contraseña' iconName="eye" secureTextEntry={true} />
+                        <InputField name='confirmPassword' placeholder='Confirmar Contraseña' iconName="eye" secureTextEntry={true} />
 
                         <PrimaryButton title="Registrarse" onPress={handleSubmit} />
                         <TextLink title="Iniciar Sesión" onPress={() => navigation.navigate('Login')} />
                     </View>
-                );
-            }}
-        </Formik>
+                )}
+            </Formik>
+        </KeyboardAwareScrollView>
     );
 }
 
 const styles = StyleSheet.create({
+    scrollContainer: {
+        flexGrow: 1,
+        justifyContent: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: '#769BCE',

@@ -74,8 +74,8 @@ const ResultScreen = () => {
 
     const tableHead = ['', 'Perímetro', 'Área'];
     const tableData = [
-        [<Text style={styles.boldText}>Excavación</Text>, `${viewData.excavationPerimeter} mm`, `${viewData.excavationArea} mm²`],
-        [<Text style={styles.boldText}>Nervio</Text>, `${viewData.neuroretinalRimPerimeter} mm`, `${viewData.neuroretinalRimArea} mm²`]
+        [<Text style={styles.boldText}>Excavación</Text>, `${viewData.excavationPerimeter} mm`, `${viewData.excavationArea} mm`],
+        [<Text style={styles.boldText}>Nervio</Text>, `${viewData.neuroretinalRimPerimeter} mm`, `${viewData.neuroretinalRimArea} mm`]
     ];
 
     const metricRatiosHead = ['Distancia', 'Perímetro', 'Área'];
