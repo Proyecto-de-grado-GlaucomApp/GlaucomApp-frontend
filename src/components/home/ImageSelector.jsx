@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 const ImageSelector = ({ onPress, imageSource, text }) => (
     <TouchableOpacity style={styles.uploadContainer} onPress={onPress} accessibilityRole="button" >
-        <Image source={imageSource} style={styles.uploadIcon} />
+        <Image source={imageSource} style={styles.uploadIcon} testID="upload-image" />
         <Text style={styles.descriptionText}>{text}</Text>
     </TouchableOpacity>
 );
