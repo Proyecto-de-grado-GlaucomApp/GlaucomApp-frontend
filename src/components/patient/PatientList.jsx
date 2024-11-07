@@ -22,6 +22,7 @@ const PatientList = ({ patients, onPatientPress, onEndReached, loadingMore, load
             onEndReached={onEndReached}
             onEndReachedThreshold={0.5}
             ListFooterComponent={loadingMore ? <LoadingIndicator message={loadingMoreMessage} /> : null}
+            testID="patient-list"
         />
     );
 };
