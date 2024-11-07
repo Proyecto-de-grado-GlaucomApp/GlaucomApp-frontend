@@ -4,9 +4,9 @@ import { View, Image, StyleSheet } from 'react-native';
 const ImageDisplay = ({ imageUri }) => (
     <View style={styles.imageContainer}>
         {imageUri ? (
-            <Image source={{ uri: imageUri }} style={styles.image} />
+            <Image source={{ uri: imageUri }} style={styles.image} testID="displayed-image" />
         ) : (
-            <View style={styles.imagePlaceholder} />
+            <View style={styles.imagePlaceholder} testID="image-placeholder" />
         )}
     </View>
 );
