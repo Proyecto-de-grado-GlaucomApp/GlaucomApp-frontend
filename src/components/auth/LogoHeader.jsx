@@ -5,7 +5,11 @@ const LogoHeader = () => {
     return (
         <View style={styles.container}>
             <View style={styles.logoContainer}>
-                <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
+                <Image
+                    source={require('../../../assets/images/logo.png')}
+                    style={styles.logo}
+                    testID="logo-image" // Id para para pruebas
+                />
                 <View style={styles.logoTextContainer}>
                     <Text style={styles.title}>GlauApp</Text>
                     <Text style={styles.subtitle}>Pontificia Universidad Javeriana</Text>
