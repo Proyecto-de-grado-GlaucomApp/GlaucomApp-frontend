@@ -17,6 +17,7 @@ const ViewImageScreen = () => {
     return (
         <View style={styles.container}>
             <ImageViewer
+                testID="image-viewer"
                 imageUrls={images}
                 enableSwipeDown={true}
                 onSwipeDown={() => navigation.goBack()}
