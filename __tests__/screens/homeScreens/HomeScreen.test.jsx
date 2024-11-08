@@ -5,7 +5,12 @@ import {pickImage} from '../../../src/utils/picker/imagePicker';
 import {pickDocument} from '../../../src/utils/picker/documentPicker';
 import {takePhoto} from '../../../src/utils/picker/cameraPicker';
 import HomeScreen from "../../../src/screens/homeScreens/HomeScreen";
+import '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
+jest.mock('@react-native-async-storage/async-storage', () => ({
+    getItem: jest.fn(),
+    removeItem: jest.fn(),
+}));
 jest.mock('../../../src/utils/picker/imagePicker', () => ({
     pickImage: jest.fn(),
 }));
