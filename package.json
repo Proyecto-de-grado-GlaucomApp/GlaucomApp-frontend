@@ -1,5 +1,5 @@
 {
-  "name": "front-end",
+  "name": "glauapp",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
   "scripts": {
@@ -25,13 +25,13 @@
     "assets": "^3.0.1",
     "axios": "^1.7.7",
     "date-fns": "^4.1.0",
-    "expo": "^51.0.38",
+    "expo": "~51.0.39",
     "expo-document-picker": "~12.0.2",
     "expo-file-system": "~17.0.1",
     "expo-font": "~12.0.10",
     "expo-image-picker": "~15.0.7",
     "expo-media-library": "^16.0.5",
-    "expo-router": "^3.5.23",
+    "expo-router": "~3.5.24",
     "expo-status-bar": "~1.12.1",
     "formik": "^2.4.6",
     "jest-expo": "~51.0.4",

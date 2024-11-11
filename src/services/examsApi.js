@@ -1,10 +1,16 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import showErrorMessage from "../utils/messages/errorMessages";
+import {format} from 'date-fns';
+import {Alert} from "react-native";
+import {refreshTokenAccount} from "./accountApi";
 
 export async function getExams(startIndex = 0, endIndex = 30, pacientId) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/exams?startIndex=${startIndex}&endIndex=${endIndex}&pacientId=${pacientId}`;
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/get/exams?startIndex=${startIndex}&endIndex=${endIndex}&pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -31,10 +37,12 @@ export async function getExams(startIndex = 0, endIndex = 30, pacientId) {
 
 export async function getExamById(examId, pacientId) {
 
-    console.log('pacientId',pacientId);
+    //await refreshTokenAccount();
+
+    console.log('pacientId', pacientId);
 
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/exam?examId=${examId}&pacientId=${pacientId}`;
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/get/exam?examId=${examId}&pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -60,7 +68,10 @@ export async function getExamById(examId, pacientId) {
 
 export async function deleteExam(examId, pacientId) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/delete/exam/${examId}?pacientId=${pacientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -86,10 +97,22 @@ export async function deleteExam(examId, pacientId) {
 }
 
 
-import {format} from 'date-fns';
-import {Alert} from "react-native";
 
-export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeterRatio, areaRatio, neuroretinalRimPerimeter, neuroretinalRimArea,excavationPerimeter,excavationArea,state,ddlStage}) => {
+
+export const saveExam = async ({
+                                   cedula,
+                                   name,
+                                   urlImage,
+                                   distanceRatio,
+                                   perimeterRatio,
+                                   areaRatio,
+                                   neuroretinalRimPerimeter,
+                                   neuroretinalRimArea,
+                                   excavationPerimeter,
+                                   excavationArea,
+                                   state,
+                                   ddlStage
+                               }) => {
     const date = format(new Date(), "yyyy-MM-dd");
 
     const examenData = {
@@ -108,13 +131,15 @@ export const saveExam = async ({cedula, name, urlImage, distanceRatio, perimeter
         ddlStage
     };
 
+    //await refreshTokenAccount();
+
     const token = await AsyncStorage.getItem('token');
     if (!token) {
         throw new Error('No token found. Please log in again.');
     }
 
     try {
-        const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/exam", {
+        const response = await fetch(process.env.API_URL + "/mobile/clinical_history/save/exam", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

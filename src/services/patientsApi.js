@@ -1,11 +1,15 @@
 import axios from 'axios';
 import showErrorMessage from "../utils/messages/errorMessages";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {refreshTokenAccount} from "./accountApi";
 
 
-export async function getPatients(startIndex = 0, endIndex = 15) {
+export async function getPatients(startIndex = 0, endIndex = 30) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/pacients?startIndex=${startIndex}&endIndex=${endIndex}`;
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/get/pacients?startIndex=${startIndex}&endIndex=${endIndex}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -19,7 +23,7 @@ export async function getPatients(startIndex = 0, endIndex = 15) {
             'Content-Type': 'application/json',
         };
 
-        const response = await axios.get(apiUrl, { headers });
+        const response = await axios.get(apiUrl, {headers});
         console.log('Fetched Patients:', response.data);
         return response.data;
     } catch (error) {
@@ -31,7 +35,10 @@ export async function getPatients(startIndex = 0, endIndex = 15) {
 
 export async function getPatientByCedula(cedula) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/get/pacient?cedula=${cedula}`;
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/get/pacient?cedula=${cedula}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -46,13 +53,13 @@ export async function getPatientByCedula(cedula) {
             'Content-Type': 'application/json',
         };
 
-        const response = await axios.get(apiUrl, { headers });
+        const response = await axios.get(apiUrl, {headers});
         console.log('Fetched Patient by Cedula:', response.data);
         return response.data;
     } catch (error) {
         console.error('Error fetching patient by cedula:', error);
         if (error.response && error.response.status === 404) {
-            return { status: 404 };
+            return {status: 404};
         }
         showErrorMessage(error);
         throw error;
@@ -60,10 +67,12 @@ export async function getPatientByCedula(cedula) {
 }
 
 
-
 export async function deletePatient(patientId) {
     try {
-        const apiUrl = `http://192.168.1.3:8000/mobile/clinical_history/delete/pacient/${patientId}`;
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + `/mobile/clinical_history/delete/pacient/${patientId}`;
         const token = await AsyncStorage.getItem('token');
 
         console.log('URL:', apiUrl);
@@ -78,7 +87,7 @@ export async function deletePatient(patientId) {
             'Content-Type': 'application/json',
         };
 
-        const response = await axios.delete(apiUrl, { headers });
+        const response = await axios.delete(apiUrl, {headers});
         console.log('Deleted Patient:', response.data);
         return response.data;
     } catch (error) {
@@ -89,11 +98,13 @@ export async function deletePatient(patientId) {
 }
 
 
-export const savePatient = async ({ name, cedula }) => {
+export const savePatient = async ({name, cedula}) => {
     const pacienteData = {
         name,
         cedula
     };
+
+    //await refreshTokenAccount();
 
     try {
         const token = await AsyncStorage.getItem('token');
@@ -101,7 +112,7 @@ export const savePatient = async ({ name, cedula }) => {
             throw new Error('No token found. Please log in again.');
         }
 
-        const response = await fetch("http://192.168.1.3:8000/mobile/clinical_history/save/pacient", {
+        const response = await fetch(process.env.API_URL + "/mobile/clinical_history/save/pacient", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,10 +1,15 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import showErrorMessage from "../utils/messages/errorMessages";
+import {refreshTokenAccount} from "./accountApi";
 
 export async function postUploadImage(imageUri) {
     try {
-        const apiUrl = "http://192.168.1.3:8000/mobile/glaucoma-screening/process";
+
+
+        //await refreshTokenAccount();
+
+        const apiUrl = process.env.API_URL + "/mobile/glaucoma-screening/process";
 
         console.log('apiUrl:  ', apiUrl);
 
@@ -14,7 +19,6 @@ export async function postUploadImage(imageUri) {
             throw new Error('No token found. Please log in again.');
         }
         console.log('token-getItem:  ', token);
-
 
 
         // Confirmar que imageUri es válido

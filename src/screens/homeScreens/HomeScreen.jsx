@@ -17,7 +17,9 @@ const HomeScreen = ({ navigation }) => {
         const getToken = async () => {
             const tokenDecoded = await AsyncStorage.getItem('tokenDecoded');
             if (tokenDecoded) {
-                setNameDecode(tokenDecoded);
+                // Dividir el nombre completo por los espacios y tomar solo el primer valor
+                const firstName = tokenDecoded.split(" ")[0];
+                setNameDecode(firstName);
             }
         };
         getToken();

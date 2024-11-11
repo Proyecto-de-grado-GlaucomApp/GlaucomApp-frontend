@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from "../tabNavigator/TabNavigation";
 import AuthNavigation from "../stackNavigator/AuthNavigation";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Stack = createStackNavigator();
@@ -11,9 +12,18 @@ const Stack = createStackNavigator();
 const AppNavigator = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+
+
     // simulaciond e autenticacion
-    useEffect(() => {
-        // lógica para verificar si el usuario está autenticado
+    useEffect(async () => {
+
+        const token = await AsyncStorage.getItem('token');
+        if (!token) {
+            setIsAuthenticated(false);
+        }
+        else {
+            setIsAuthenticated(true);
+        }
 
     }, []);
 

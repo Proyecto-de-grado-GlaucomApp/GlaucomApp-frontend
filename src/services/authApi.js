@@ -2,15 +2,20 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import showErrorMessage from "../utils/messages/errorMessages";
 import {jwtDecode} from "jwt-decode";
+import {refreshTokenAccount} from "./accountApi";
 
-const apiUrlLogin = "http://192.168.1.3:8000/mobile/auth/login";
-const apiUrlRegister = "http://192.168.1.3:8000/mobile/auth/register";
+const apiUrlLogin = process.env.API_URL + "/mobile/auth/login";
+const apiUrlRegister = process.env.API_URL + "/mobile/auth/register";
 
 const authApi = {
+
+
+
     login: async (username, password) => {
         try {
+
             console.log("apiUrlLogin: ", apiUrlLogin);
-            const response = await axios.post(apiUrlLogin, { username, password }, { withCredentials: true });
+            const response = await axios.post(apiUrlLogin, {username, password}, {withCredentials: true});
 
             console.log("Respuesta del servidor (login): ", response);
 
@@ -32,8 +37,6 @@ const authApi = {
             await AsyncStorage.setItem('tokenDecoded', nameDecoded.name);
 
 
-
-
             return response.data;
         } catch (error) {
             console.error('Error en login: ', error);
@@ -44,11 +47,13 @@ const authApi = {
 
     AuthRegister: async (name, username, password) => {
         try {
+
+
             console.log("apiUrlRegister: ", apiUrlRegister);
 
-            console.log("Datos a enviar: ", { name, username, password });
+            console.log("Datos a enviar: ", {name, username, password});
 
-            const response = await axios.post(apiUrlRegister, { name, username, password });
+            const response = await axios.post(apiUrlRegister, {name, username, password});
 
             console.log("Respuesta del servidor (register): ", response);
 
@@ -62,6 +67,8 @@ const authApi = {
 
     logOut: async () => {
 
+        //await refreshTokenAccount();
+
         const token = await AsyncStorage.getItem('token');
         if (!token) {
             throw new Error('No token found. Please log in again.');
@@ -71,7 +78,7 @@ const authApi = {
         await AsyncStorage.removeItem('tokenDecoded');
 
         try {
-            const response = await fetch("http://192.168.1.3:8000/mobile/auth/logout", {
+            const response = await fetch(process.env.API_URL + "/mobile/auth/logout", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
